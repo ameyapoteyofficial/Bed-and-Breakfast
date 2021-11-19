@@ -11,7 +11,7 @@ usersRoute.post('/register', asyncHandler(async (req,res) => {
         const {Name,Email,Password} = req.body;
         const userExists = await User.findOne({Email : Email});
         if(userExists){
-            throw new Error('User Exists');
+            throw new Error('User Exists!');
         }
         const user = await User.create({Name,Email,Password});
         res.json({

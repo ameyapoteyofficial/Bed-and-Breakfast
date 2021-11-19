@@ -1,17 +1,19 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const mongoose = require('mongoose');
-const User = require('./models/User');
+const dotenv = require('dotenv');
 const dbConnect =  require('./config/dbConnect');
 const usersRoute = require('./routes/usersRoute');
 const error = require('./middleware/errorMiddlewareHandler');
 
 
+dotenv.config();
 
 //connect to the db
 
 dbConnect();
+
+
 
 app.use(express.json());
 
@@ -21,9 +23,13 @@ app.use('/api/users',usersRoute);
 //error handler
 app.use(error.errorMiddlewareHandler);
 
+// console.log(process.env.JWT_SECRET_KEY);
 
-app.listen(5000, ()=>{
-    console.log("Server is starting on PORT 5000");
+//Port details
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, ()=>{
+    console.log(`Server is starting on PORT ${PORT}`);
 })
 
 
