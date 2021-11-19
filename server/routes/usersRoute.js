@@ -5,6 +5,15 @@ const User = require('../models/User');
 const error = require('../middleware/errorMiddlewareHandler');
 const asyncHandler = require('express-async-handler');
 const generateToken = require('../utilities/generateTokens');
+const authMiddleWare = require('../middleware/authMiddleWare');
+const expressAsyncHandler = require('express-async-handler');
+
+
+usersRoute.get('/', authMiddleWare, (req,res) => {
+    res.send(req.user);
+    
+}
+);
 
 //registering users
 usersRoute.post('/register', asyncHandler(async (req,res) => {
@@ -44,5 +53,6 @@ usersRoute.post('/login', asyncHandler( async (req,res)=>{
         throw new Error('Invalid Credentials/ User does not exist!!');
     }
 }));
+
 
 module.exports = usersRoute;
