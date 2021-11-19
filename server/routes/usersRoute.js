@@ -11,7 +11,6 @@ const expressAsyncHandler = require('express-async-handler');
 
 usersRoute.get('/', authMiddleWare, (req,res) => {
     res.send(req.user);
-    
 }
 );
 
