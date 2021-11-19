@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const User = require('./models/User');
 const dbConnect =  require('./config/dbConnect');
 const usersRoute = require('./routes/usersRoute');
+const error = require('./middleware/errorMiddlewareHandler');
+
 
 
 //connect to the db
@@ -15,6 +17,9 @@ app.use(express.json());
 
 //Routes
 app.use('/api/users',usersRoute);
+
+//error handler
+app.use(error.errorMiddlewareHandler);
 
 
 app.listen(5000, ()=>{
