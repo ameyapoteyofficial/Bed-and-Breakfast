@@ -4,6 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const dbConnect =  require('./config/dbConnect');
 const usersRoute = require('./routes/usersRoute');
+const adminRoute = require('./routes/adminRoute');
 const error = require('./middleware/errorMiddlewareHandler');
 
 
@@ -19,7 +20,7 @@ app.use(express.json());
 
 //Routes
 app.use('/api/users',usersRoute);
-
+app.use('/api/admin',adminRoute);
 //error handler
 app.use(error.errorMiddlewareHandler);
 
