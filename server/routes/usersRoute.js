@@ -53,5 +53,42 @@ usersRoute.post('/login', asyncHandler( async (req,res)=>{
     }
 }));
 
+usersRoute.delete('/:id', asyncHandler(async (req,res) => {
+    
+    try{
+        const user = await User.findByIdAndDelete(req.params.id);
+        res.status(200);
+        res.json(user);
+    }
+    catch(err){
+        res.status(500);
+        res.json(err);
+    }
+})
+);
+
+usersRoute.put('/:id', authMiddleWare, asyncHandler(async (req,res) => {
+
+    const user = await User.findById(req.params.id);
+    
+    if(user){
+        const newUser = await User.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            {
+                new:true,
+                runValidators:true,
+            }
+        );
+        res.status(200);
+        res.json(newUser);
+    }
+    else{
+        res.status(500);
+        throw new Error('Update failed');
+    }
+
+})
+);
 
 module.exports = usersRoute;

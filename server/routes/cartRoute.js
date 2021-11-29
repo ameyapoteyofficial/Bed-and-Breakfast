@@ -18,6 +18,35 @@ cartRoute.get('/', asyncHandler(async (req,res) => {
 })
 );
 
+cartRoute.get('/getUserCarts', asyncHandler(async (req,res) => {
+    const userID = req.body.UserID;
+    const carts = await Cart.find({'UserID':userID});
+    if(carts){
+        res.status(200);
+        res.json(carts);
+    }
+    else{
+        res.status(500);
+        throw new Error('Cart is empty!');
+    }
+})
+);
+
+cartRoute.get('/getOneCart', asyncHandler(async (req,res) => {
+    const userID = req.body.UserID;
+    const roomID = req.body.RoomID;
+    const cart = await Cart.findOne({'UserID':userID, 'Room._id':roomID});
+    if(cart){
+        res.status(200);
+        res.json(cart);
+    }
+    else{
+        res.status(500);
+        throw new Error('Cart is empty!');
+    }
+})
+);
+
 cartRoute.post('/', asyncHandler(async (req,res) => {
    
     const cart = await Cart.create(req.body);
@@ -35,7 +64,6 @@ cartRoute.post('/', asyncHandler(async (req,res) => {
         res.status(500);
         throw new Error('Add to Cart');
     }
- 
 })
 );
 
