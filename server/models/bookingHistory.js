@@ -20,8 +20,6 @@ const bookingHistorySchema = new mongoose.Schema({
 
     EndDate : Date,
 
-   BookingDate : Date,
-
    UserID : {
        type: mongoose.Schema.Types.ObjectId,
        ref: 'User',
