@@ -19,7 +19,7 @@ dbConnect();
 
 
 app.use(express.json());
-
+app.use(cors());
 //Routes
 app.use('/api/users',usersRoute);
 app.use('/api/admin',adminRoute);

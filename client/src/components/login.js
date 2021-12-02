@@ -21,12 +21,29 @@ class LoginPage extends Component{
     }
     onSubmitForm(e) {
         e.preventDefault();
-        alert("form submitted!!");
+        const loginObject = {
+            Email : this.state.emailId,
+            Password : this.state.password
+        }
+        axios.post("http://localhost:5000/api/users/login", loginObject).then((res) => {
+            if (res.status === 200) {
+              alert("Success!");
+              this.setState({
+                emailId : "",
+                password : ""
+              });
+      
+             
+            } else {
+              alert("error"+ res.json);
+      
+              return;
+            }
+          });
     }
     render(){
     return (
         <form className = "mt-5" onSubmit= {this.onSubmitForm}>
-
                     <input 
                         type = "text" 
                         className = "form-control  mt-2" 
