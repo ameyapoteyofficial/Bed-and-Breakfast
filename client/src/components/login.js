@@ -1,25 +1,49 @@
-import React, {Fragment, useEffect, useState} from "react";
- 
+import React, {Component, Fragment, useEffect, useState} from "react";
+import axios from "axios";
+import { withRouter } from "react-router-dom";
 
-const LoginPage = () =>{
-    return <Fragment>
-    <nav class="navbar navbar-dark bg-dark">
-        <span class="navbar-brand mb-0 h1">Airbnb</span>
-    
-        </nav>
-        <div className="container mt-5 w-50">
-        <form >
-            <div className="form-group">
-                <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
-                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div className="form-group">
-                <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"></input>
-            </div>
-            <button type="submit" className="btn btn-primary mr-5">Login</button>
-            <button type="submit" className="btn btn-warning">Signup</button>
+class LoginPage extends Component{
+    constructor(props){
+        super(props);
+
+        this.onSubmitForm = this.onSubmitForm.bind(this);
+
+        this.state = {
+            emailId : "",
+            password : ""
+        };
+    }
+    setEmailId(e){
+        this.setState({emailId: e.target.value});
+    }
+    setPassword(e){
+        this.setState({password: e.target.value});
+    }
+    onSubmitForm(e) {
+        e.preventDefault();
+        alert("form submitted!!");
+    }
+    render(){
+    return (
+        <form className = "mt-5" onSubmit= {this.onSubmitForm}>
+
+                    <input 
+                        type = "text" 
+                        className = "form-control  mt-2" 
+                        value = {this.state.emailId}
+                        placeholder = "Enter Email"
+                        onChange = {this.setEmailId.bind(this)}
+                        />
+                    <input 
+                        type = "password" 
+                        className = "form-control  mt-2" 
+                        value = {this.state.password}
+                        placeholder = "Enter Password"
+                        onChange = {this.setPassword.bind(this)}
+                        />
+                <button type="submit" className="btn btn-primary">Login</button>
         </form>
-        </div>
-    </Fragment>
+    );
+    }   
 }
-export default LoginPage;
+export default withRouter(LoginPage);
