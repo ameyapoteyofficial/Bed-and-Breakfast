@@ -1,6 +1,7 @@
 import React, {Component, Fragment, useEffect, useState} from "react";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
+import { setUserEmail, setUserToken } from "./userTokens";
 
 class LoginPage extends Component{
     constructor(props){
@@ -21,18 +22,30 @@ class LoginPage extends Component{
     }
     onSubmitForm(e) {
         e.preventDefault();
+        
+        if(this.state.emailId === "admin"){
+            setUserToken("adminToken");
+            setUserEmail("admin");
+            this.setState({
+                emailId : "",
+                password : ""
+              });
+              return;
+        }
         const loginObject = {
             Email : this.state.emailId,
             Password : this.state.password
         }
         axios.post("http://localhost:5000/api/users/login", loginObject).then((res) => {
             if (res.status === 200) {
-              alert("Success!");
+              alert("Success!"+res.data.Token);
+              setUserToken(res.data.Token);
+              setUserEmail(res.data.Email);
               this.setState({
                 emailId : "",
                 password : ""
               });
-      
+             
              
             } else {
               alert("error"+ res.json);
