@@ -53,23 +53,15 @@ usersRoute.post('/login', asyncHandler( async (req,res)=>{
     }
 }));
 
-usersRoute.delete('/:id', asyncHandler(async (req,res) => {
-    
-    try{
-        const user = await User.findByIdAndDelete(req.params.id);
-        res.status(200);
-        res.json(user);
-    }
-    catch(err){
-        res.status(500);
-        res.json(err);
-    }
-})
-);
 
 usersRoute.put('/:id', authMiddleWare, asyncHandler(async (req,res) => {
 
+    if(! req.user._id.equals(req.params.id)){
+        res.status(500);
+        throw new Error('User mismatch!');
+    }
     const user = await User.findById(req.params.id);
+
     
     if(user){
         const newUser = await User.findByIdAndUpdate(

@@ -2,15 +2,20 @@ const express = require('express');
 const bookingHistoryRoute = express.Router();
 
 const bookingHistory = require('../models/bookingHistory');
-
+const authMiddleWare = require('../middleware/authMiddleWare');
 const cart = require('../models/Cart');
 
 const error = require('../middleware/errorMiddlewareHandler');
 const asyncHandler = require('express-async-handler');
 
 
-bookingHistoryRoute.get("/", asyncHandler(async (req,res) => {
+bookingHistoryRoute.get("/", authMiddleWare, asyncHandler(async (req,res) => {
     const userID = req.body.userID;
+    if(! req.user._id.equals(userID)){
+        res.status(500);
+        throw new Error('User mismatch!');
+    }
+
     const bookings = await bookingHistory.find({ 'UserID': userID });
     if(bookings){
         res.status(200);
@@ -23,7 +28,7 @@ bookingHistoryRoute.get("/", asyncHandler(async (req,res) => {
 })
 );
 
-bookingHistoryRoute.post('/', asyncHandler(async (req,res) => {
+bookingHistoryRoute.post('/', authMiddleWare, asyncHandler(async (req,res) => {
    
     const booking = await bookingHistory.create(req.body);
     if(booking){
