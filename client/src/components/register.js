@@ -107,6 +107,14 @@ class RegisterPage extends Component {
                     return;
                   }
                 this.props.history.push("/");
+            }).catch(err => {
+                if (err.response) {
+                  alert("User Already Exists!!");
+                } else if (err.request) {
+                  // client never received a response, or request never left
+                } else {
+                  // anything else
+                }
             });
         }
 
