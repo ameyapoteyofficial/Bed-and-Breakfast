@@ -1,6 +1,9 @@
 import React, {Component, Fragment, useEffect, useState} from "react";
 import axios from "axios";
+import Formcontent from "./formcontent"
 import { withRouter } from "react-router-dom";
+import { Register } from "./paths";
+import Footer from "./footer-file";
 import { setUserEmail, setUserToken } from "./userTokens";
 
 class LoginPage extends Component{
@@ -23,7 +26,7 @@ class LoginPage extends Component{
     onSubmitForm(e) {
         e.preventDefault();
         
-        if(this.state.emailId === "admin"){
+        if(this.state.emailId === "admin" && this.state.password === "admin"){
             setUserToken("adminToken");
             setUserEmail("admin");
             this.setState({
@@ -56,23 +59,29 @@ class LoginPage extends Component{
     }
     render(){
     return (
+        <div className="container mt-5"> 
+        <h1> Login </h1>
         <form className = "mt-5" onSubmit= {this.onSubmitForm}>
-                    <input 
+                    <Formcontent 
+                        id = "email" 
                         type = "text" 
-                        className = "form-control  mt-2" 
+                        label = "Email"
                         value = {this.state.emailId}
                         placeholder = "Enter Email"
                         onChange = {this.setEmailId.bind(this)}
                         />
-                    <input 
+                    <Formcontent 
+                        id = "password"
                         type = "password" 
-                        className = "form-control  mt-2" 
+                        label = "Password"
                         value = {this.state.password}
                         placeholder = "Enter Password"
                         onChange = {this.setPassword.bind(this)}
                         />
-                <button type="submit" className="btn btn-primary">Login</button>
+                <button type="submit" className="btn btn-primary mt-3">Login</button>
         </form>
+        <Footer url={Register} text="New User?" name="Register"/>
+        </div>
     );
     }   
 }
