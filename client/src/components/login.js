@@ -39,6 +39,7 @@ class LoginPage extends Component{
             Email : this.state.emailId,
             Password : this.state.password
         }
+        
         axios.post("http://localhost:5000/api/users/login", loginObject).then((res) => {
             if (res.status === 200) {
               alert("Success!"+res.data.Token);
@@ -55,7 +56,15 @@ class LoginPage extends Component{
       
               return;
             }
-          });
+          }).catch(err => {
+            if (err.response) {
+              alert("Invalid Credentials!!");
+            } else if (err.request) {
+              // client never received a response, or request never left
+            } else {
+              // anything else
+            }
+        });
     }
     render(){
     return (
