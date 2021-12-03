@@ -149,7 +149,8 @@ class RegisterPage extends Component {
                         />
                 <button type="submit" className="btn btn-primary mt-3">Register</button>
         </form>
-        <Footer url={Login} text="New User?" name="Login"/>
+        <div className= "mt-3">
+            <Footer url={Login}  text="Existing User? " name="Login"/></div>
         </div>
         );
     }

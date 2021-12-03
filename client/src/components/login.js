@@ -80,7 +80,10 @@ class LoginPage extends Component{
                         />
                 <button type="submit" className="btn btn-primary mt-3">Login</button>
         </form>
-        <Footer url={Register} text="New User?" name="Register"/>
+        <div className= "mt-3">
+            <Footer url={Register} text="New User? " name="Register"/>
+        </div>
+        
         </div>
     );
     }   
