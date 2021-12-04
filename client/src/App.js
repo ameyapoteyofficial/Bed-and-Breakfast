@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LoginPage from './components/login';
 import RegisterPage from './components/register';
 import UserHome  from "./components/userHome";
+import Add from "./components/addroom";
 
 import {
   Login,
@@ -23,6 +24,7 @@ function App() {
         <Route exact path={Login} component={LoginPage} />
         <Route exact path={Register} component={RegisterPage} />
         <Route exact path={Home} component={UserHome} />
+        <Route exact path={AddRoom} component={Add} />
        </Switch> 
       </Router>
 
