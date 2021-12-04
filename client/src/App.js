@@ -1,15 +1,18 @@
-
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LoginPage from './components/login';
 import RegisterPage from './components/register';
+import UserHome  from "./components/userHome";
 
 import {
   Login,
   Register,
-  UserHome,
+  Home,
+  Booking_History,
+  AddRoom,
+  EditRoom,
+  DeleteRoom,
 } from './components/paths';
-import userHome from './components/userHome';
 
 function App() {
   return (
@@ -19,7 +22,7 @@ function App() {
        <Switch>
         <Route exact path={Login} component={LoginPage} />
         <Route exact path={Register} component={RegisterPage} />
-        <Route exact path={UserHome} component={userHome} />
+        <Route exact path={Home} component={UserHome} />
        </Switch> 
       </Router>
 

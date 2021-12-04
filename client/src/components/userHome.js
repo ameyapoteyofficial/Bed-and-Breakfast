@@ -1,12 +1,16 @@
 import React, {Component} from "react";
 import axios from "axios";
-import Formcontent from "./formcontent"
+import Formcontent from "./formcontent";
+import Menu from "./menu";
 import { withRouter } from "react-router-dom";
 import { getUserToken } from "./userTokens";
 
 class UserHome extends Component{
     constructor(props) {
         super(props);
+        this.state = {
+          userName: "admin"
+        }
 
     }
     componentDidMount(){
@@ -30,7 +34,9 @@ class UserHome extends Component{
     }
     render(){
         return(
-            <div>Home Page</div>
+            <div>
+              <Menu userName={this.state.userName} style={{display: "fixed", top: 0}}/>
+            </div>
         )
     }
 }
