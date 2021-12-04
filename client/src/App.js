@@ -14,6 +14,7 @@ import {
   EditRoom,
   DeleteRoom,
 } from './components/paths';
+import UpdateRoom from './components/updateroom';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route exact path={Register} component={RegisterPage} />
         <Route exact path={Home} component={UserHome} />
         <Route exact path={AddRoom} component={Add} />
+        <Route exact path={EditRoom} component={UpdateRoom} />
        </Switch> 
       </Router>
 
