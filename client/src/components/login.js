@@ -48,7 +48,7 @@ class LoginPage extends Component{
                 emailId : "",
                 password : ""
               });
-              this.props.history.push("/UserHome");
+              this.props.history.push("/userHome");
              
             } else {
               alert("error"+ res.json);
