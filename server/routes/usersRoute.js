@@ -2,6 +2,7 @@ const express = require('express');
 
 const usersRoute = express.Router();
 const User = require('../models/User');
+const Room = require('../models/Room');
 const error = require('../middleware/errorMiddlewareHandler');
 const asyncHandler = require('express-async-handler');
 const generateToken = require('../utilities/generateTokens');
@@ -13,7 +14,15 @@ usersRoute.get('/', authMiddleWare, (req,res) => {
     res.send(req.user);
 }
 );
-
+usersRoute.get('/rooms', authMiddleWare, (req,res)  => {
+    Room.find((error, data) => {
+        if (error) {
+            return next(error);
+        } else {
+            res.json(data);
+        }
+    })
+});
 //registering users
 usersRoute.post('/register', asyncHandler(async (req,res) => {
         const {Name,Email,Password} = req.body;

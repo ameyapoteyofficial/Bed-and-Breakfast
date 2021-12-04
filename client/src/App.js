@@ -7,7 +7,9 @@ import RegisterPage from './components/register';
 import {
   Login,
   Register,
+  UserHome,
 } from './components/paths';
+import userHome from './components/userHome';
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
        <Switch>
         <Route exact path={Login} component={LoginPage} />
         <Route exact path={Register} component={RegisterPage} />
+        <Route exact path={UserHome} component={userHome} />
        </Switch> 
       </Router>
 

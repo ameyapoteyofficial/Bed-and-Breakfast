@@ -42,14 +42,13 @@ class LoginPage extends Component{
         
         axios.post("http://localhost:5000/api/users/login", loginObject).then((res) => {
             if (res.status === 200) {
-              alert("Success!"+res.data.Token);
               setUserToken(res.data.Token);
               setUserEmail(res.data.Email);
               this.setState({
                 emailId : "",
                 password : ""
               });
-             
+              this.props.history.push("/UserHome");
              
             } else {
               alert("error"+ res.json);
