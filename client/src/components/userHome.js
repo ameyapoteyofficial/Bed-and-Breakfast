@@ -24,7 +24,7 @@ class UserHome extends Component{
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("data is:"+ data.json);
+        console.log("data is:"+ data);
         // this.setState({
         //   data: data,
         //   tempData: data,

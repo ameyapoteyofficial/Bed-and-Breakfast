@@ -33,6 +33,7 @@ class LoginPage extends Component{
                 emailId : "",
                 password : ""
               });
+              this.props.history.push("/userHome");
               return;
         }
         const loginObject = {
