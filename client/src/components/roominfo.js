@@ -3,7 +3,7 @@ import {withRouter} from "react-router-dom";
 import Menu from "./menu";
 import {Button, Card} from "react-bootstrap";
 import {getUserToken, getUserEmail} from "./getToken";
-import {EditRoom} from "./paths";
+import {DeleteRoom, EditRoom} from "./paths";
 import axios from "axios";
 
 class RoomInfo extends React.Component {
@@ -26,7 +26,7 @@ class RoomInfo extends React.Component {
         }
         if(name === "delete") {
             e.preventDefault();
-            this.props.history.push(EditRoom, {id: data._id});
+            this.props.history.push(DeleteRoom, {id: data._id});
         }
     }
 
