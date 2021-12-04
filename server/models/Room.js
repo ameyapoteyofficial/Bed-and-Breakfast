@@ -10,6 +10,7 @@ const roomSchema = new mongoose.Schema({
     Price : Number,
     Description : String,
     Category : String,
+    Deleted: Boolean
 },{
     collection:'Room',
     timestamps: true,

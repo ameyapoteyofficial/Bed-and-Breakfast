@@ -50,5 +50,17 @@ adminRoute.route('/update/:id').put((req, res, next) => {
     })
 });
 
+adminRoute.route('/delete/:id').delete((req, res, next) => {
+    Room.findByIdAndUpdate(req.params.id, {
+        Deleted: true
+    },(error, data) => {
+        if (error) {
+            return next(error);
+        } else {
+            res.json(data);
+            console.log("Room deleted");
+        }
+    })
+})
 
 module.exports = adminRoute;

@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import Menu from "./menu";
 
-export default class Add extends Component {
+export default class UpdateRoom extends Component {
   constructor(props) {
     super(props);
 
@@ -18,19 +18,42 @@ export default class Add extends Component {
     this.onChangeMaximum = this.onChangeMaximum.bind(this);
     this.onChangeBedType = this.onChangeBedType.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
 
-    // Setting up state
     this.state = {
-      name: "",
-      price: "",
-      category: "",
-      quantity: "",
-      description: "",
-      image: "",
-      area: "",
-      maximum: "",
-      bedtype: "",
+        name: "",
+        price: "",
+        category: "",
+        quantity: "",
+        description: "",
+        image: "",
+        area: "",
+        maximum: "",
+        bedtype: "",
+        id: this.props.location.state.id,
     };
+  }
+
+  componentDidMount() {
+    console.log(this.props.location.state.id);
+    axios
+      .get("http://localhost:5000/api/admin/edit/" + this.props.location.state.id)
+      .then((res) => {
+        this.setState({
+          id: res.data.id,
+          name: res.data.Name,
+          price: res.data.Price,
+          category: res.data.Category,
+          quantity: res.data.Number_of_Beds,
+          description: res.data.Description,
+          image: res.data.Image,
+          area: res.data.Area_in_sqft,
+          maximum: res.data.Max_Occupancy,
+          bedtype: res.data.Bed_Type,
+        });
+      }).catch((error) => {
+          console.log(error);
+      });
   }
 
   onChangeItemId(e) {
@@ -85,22 +108,31 @@ export default class Add extends Component {
       Price: this.state.price,
       Description: this.state.description,
       Category: this.state.category,
-      Deleted: false,
     };
 
-    axios.post("http://localhost:5000/api/admin/create", itemObject).then((res) => console.log(res.data));
-    alert("Room Inserted");
-    this.setState({
-        name: "",
-        price: "",
-        category: "",
-        quantity: "",
-        description: "",
-        image: "",
-        area: "",
-        maximum: "",
-        bedtype: "",
-    });
+    axios
+      .put("http://localhost:5000/api/admin/update/" + this.props.location.state.id, itemObject)
+      .then((res) => {
+        console.log(res.data);
+        console.log("Room details successfully updated");
+        this.props.history.push("/userHome");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  deleteItem() {
+    console.log("del state:" + this.state.id);
+    axios
+      .delete("http://localhost:5000/api/admin/delete/" + this.props.location.state.id)
+      .then((res) => {
+        console.log("Room deleted succesfully!");
+        this.props.history.push("/userHome");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   render() {
@@ -111,11 +143,11 @@ export default class Add extends Component {
         <div className="form-wrapper container" style={{ marginTop: "50px" }}>
           <h2 className="title1" align="center">
             {" "}
-            Add Room{" "}
+            Update Room{" "}
           </h2>
           <Form onSubmit={this.onSubmit}>
-           
-            <Form.Group controlId="Name">
+            
+          <Form.Group controlId="Name">
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
@@ -204,10 +236,13 @@ export default class Add extends Component {
                 </option>
               </Form.Control>
             </Form.Group>
-           
 
             <Button variant="danger" size="lg" block="block" type="submit">
-              Add Room
+              Update Room
+            </Button>
+
+            <Button onClick={this.deleteItem} variant="danger" size="lg" block="block">
+              Delete Item
             </Button>
           </Form>
         </div>
