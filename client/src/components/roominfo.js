@@ -89,7 +89,7 @@ class RoomInfo extends React.Component {
                             <div>
                                 {this.state.data.Deleted === false && this.state.userName !== "admin" ?
                                     <Button variant="primary" style={{backgroundColor: '#333B3F', height: 50, width: 500}} onClick={()=>this.updateCartInfo(this.state.data)}>ADD TO FAVOURITES</Button> :
-                                    <Card.Text style={{height: 50, textAlign: "center", fontWeight: 800, fontSize: 20}}>SOLD OUT</Card.Text>
+                                    <div></div>
                                 }
                             </div>
                             <div className={"row text-align-center mt-3"}>
