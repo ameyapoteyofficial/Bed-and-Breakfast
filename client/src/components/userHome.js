@@ -59,6 +59,91 @@ class UserHome extends Component{
       }
        
     }
+    handleCheckbox = (e, s, category) => {
+      if(this.state.searchText !== "") {
+          let checkedBoxes = [...this.state.roomTypesChecked];
+          if (e.target.checked) {
+              checkedBoxes.push(s);
+              /*if(s !== "All departments") {
+                          const tempData = this.state.data.filter((value) => value.category === s);
+                          this.setState({
+                              tempData: tempData
+                          })
+                      }*/
+          } else {
+              const index = checkedBoxes.findIndex((ch) => ch === s);
+              checkedBoxes.splice(index, 1);
+          }
+          console.log("Checked Boxes: "+checkedBoxes);
+          this.setState({roomTypesChecked: checkedBoxes});
+          let updatedData = [];
+          var old_data = this.state.data;
+          console.log(checkedBoxes);
+          if (checkedBoxes.length <= 0 || checkedBoxes.length === undefined) {
+              const tempValue = this.state.data.filter((value) =>
+                  value.Category.toLowerCase().includes(this.state.searchText.toLowerCase())
+              );
+              this.setState({
+                  tempData: tempValue,
+                  updated: !this.state.updated,
+                  searchText: this.state.searchText
+              });
+          } else {
+              if (s !== "All departments") {
+                  for (var i = 0; i < checkedBoxes.length; i++) {
+                      for (var j = 0; j < this.state.tempData.length; j++) {
+                          if (checkedBoxes[i] === this.state.tempData[j].category) {
+                              updatedData.push(this.state.tempData[j]);
+                          }
+                      }
+                  }
+                  this.setState({
+                      tempData: updatedData,
+                  });
+              }
+          }
+      }
+      else {
+          let checkedBoxes = [...this.state.roomTypesChecked];
+          if (e.target.checked) {
+              checkedBoxes.push(s);
+              /*if(s !== "All departments") {
+                          const tempData = this.state.data.filter((value) => value.category === s);
+                          this.setState({
+                              tempData: tempData
+                          })
+                      }*/
+          } else {
+              const index = checkedBoxes.findIndex((ch) => ch === s);
+              checkedBoxes.splice(index, 1);
+          }
+          this.setState({roomTypesChecked: checkedBoxes});
+          let updatedData = [];
+          var old_data = this.state.data;
+          console.log(checkedBoxes);
+          if (checkedBoxes.length <= 0 || checkedBoxes.length === undefined) {
+              this.setState({
+                  tempData: old_data,
+              });
+          } else {
+              if (s !== "All departments") {
+                  for (var i = 0; i < checkedBoxes.length; i++) {
+                      for (var j = 0; j < this.state.data.length; j++) {
+                        console.log(checkedBoxes[i]+" "+this.state.data[j].Category);
+                          if (checkedBoxes[i] === this.state.data[j].Category) {
+                              updatedData.push(this.state.data[j]);
+                          }
+                      }
+                  }
+                  
+                  this.setState({
+                      tempData: updatedData,
+                  });
+              }
+          }
+      }
+};
+
     render(){
         return(
             <div>

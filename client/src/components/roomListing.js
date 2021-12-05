@@ -81,7 +81,7 @@ class RoomListing extends React.Component {
             updatedData: tempData,
             activePage: 1
         });
-        console.log("RECEIVE PROPS CALLED");
+        
     }
 
     handlePageChange(pageNumber) {

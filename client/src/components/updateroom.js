@@ -143,7 +143,7 @@ export default class UpdateRoom extends Component {
         <div className="form-wrapper container" style={{ marginTop: "50px" }}>
           <h2 className="title1" align="center">
             {" "}
-            Update Room{" "}
+            Update / Delete Room{" "}
           </h2>
           <Form onSubmit={this.onSubmit}>
             
