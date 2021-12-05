@@ -6,6 +6,7 @@ import UserHome  from "./components/userHome";
 import Add from "./components/addroom";
 import CartPage from './components/cart';
 import SuccessPage from './components/success';
+import BookingHistoryPage from './components/bookinghistory';
 
 import {
   Login,
@@ -36,6 +37,7 @@ function App() {
         <Route exact path={Favourites} component={CartPage} />
         <Route exact path={Success} component={SuccessPage} />
         <Route exact path={ViewRoom} component={Roominfo} />
+        <Route exact path={Booking_History} component={BookingHistoryPage} />
        </Switch> 
       </Router>
 

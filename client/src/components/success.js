@@ -17,7 +17,7 @@ class SuccessPage extends React.Component {
         <img
           src="https://cdn0.iconfinder.com/data/icons/basic-ui-elements-2-1-flat-style/512/Basic_UI_Elements_-_2.1_-_Flat_Style_-_36_-_Expand-50-512.png"
           className="center"
-          alt="success"
+          alt="success" height="300px" width="300px"
         />
         <h1 className="title2">Congratulations!</h1>
         <h2 className="title2">Your order has been successfully placed.</h2>

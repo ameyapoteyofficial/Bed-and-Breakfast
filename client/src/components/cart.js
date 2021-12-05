@@ -100,7 +100,7 @@ class CartPage extends Component {
         e.preventDefault();
         let token = getUserToken();
         let finalCartData = this.state.cartData;
-        console.log("finalCartData: "+finalCartData);
+        //console.log("finalCartData: "+finalCartData);
 
         finalCartData.forEach(function (cartItem) {
             
@@ -109,7 +109,12 @@ class CartPage extends Component {
             historyItem.StartDate = cartItem.StartDate;
             historyItem.EndDate = cartItem.EndDate;
             historyItem.UserID = cartItem.UserID;
-            console.log(" historyItem: "+ historyItem);
+            //console.log(" historyItem: "+ historyItem);
+
+            var registrationItem = {};
+            registrationItem.RoomID = cartItem.Room._id;
+            registrationItem.StartDate = cartItem.StartDate;
+            registrationItem.EndDate = cartItem.EndDate;
 
             axios
                 .post("http://localhost:5000/api/bookinghistory", historyItem, {
@@ -119,8 +124,18 @@ class CartPage extends Component {
                     console.log(historyItem._id + " pushed to booking history successfully");
                 })
                 .catch((error) => {
-                    alert("error");
+                    alert(error);
                 });
+
+            axios
+                .post("http://localhost:5000/api/registration", registrationItem)
+                .then((res) => {
+                    console.log(res._id + " pushed to registration history successfully");
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+
             axios
                 .delete(
                     "http://localhost:5000/api/cart/" + cartItem._id,
