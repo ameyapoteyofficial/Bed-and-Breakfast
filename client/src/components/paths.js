@@ -6,5 +6,6 @@ export const AddRoom = "/addroom";
 export const Favourites = "/favourites";
 export const EditRoom = "/editroom";
 export const DeleteRoom = "/deleteroom";
+export const Success = "/success"
 
 
