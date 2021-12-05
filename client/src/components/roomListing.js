@@ -81,7 +81,7 @@ class RoomListing extends React.Component {
             updatedData: tempData,
             activePage: 1
         });
-        
+        console.log("RECEIVE PROPS CALLED");
     }
 
     handlePageChange(pageNumber) {
@@ -109,10 +109,7 @@ class RoomListing extends React.Component {
             e.preventDefault();
             this.props.history.push("/editroom", {id: data._id});
         }
-        if(name === "delete") {
-            e.preventDefault();
-            this.props.history.push("/deleteroom", {id: data._id});
-        }
+        
     }
 
     updateCartInfo(data) {
@@ -176,11 +173,11 @@ class RoomListing extends React.Component {
                 />
                 <div className={"row mt-5"}>
                     {this.state.updatedData.map((value) => {return (
+                    <div>
+                        {value.Deleted === false ?
                         <div className={"mr-3 mb-5"} style={{border: "1px solid black"}}>
-                            {/*<img src={value.image}  alt={value.name} width={"30%"}/>*/}
-                            {/*<h6>{value.name}</h6>*/}
-                            {/*<p className={"center"}>{value.price}</p>*/}
-
+                           
+                            
                             <Card style={{ width: '19rem', border: 0 }} onClick={() => this.openProductPage(value)}>
                                 <Card.Img variant="top" src={value.Image} />
                                 <Card.Body style={{textAlign: 'center'}}>
@@ -192,25 +189,23 @@ class RoomListing extends React.Component {
                             </Card>
                             <div style={{textAlign: "center", backgroundColor: "white"}} className={"pb-3"}>
                                 <div >
-                                    
+                                    {this.state.userName !== "admin" ?
                                         <Button variant="primary" style={{backgroundColor: '#333B3F', height: 50}} onClick={()=>this.updateCartInfo(value)}>ADD TO FAVOURITES</Button> :
-                                    
+                                        <div></div>
+                                    }
                                 </div>
-                                <div className={"row ml-4 mt-3"}>
-                                    <div className={"col-sm-4"}>
+                                <div>
                                         {this.state.userName === "admin" ?
-                                            <Button variant="primary" style={{backgroundColor: '#333B3F', height: 50, width: 80}} onClick={(e) => this.openPage(e, value, "edit")}>EDIT</Button> :
+                                            <Button variant="primary" style={{backgroundColor: '#333B3F', height: 50, width: 200}} onClick={(e) => this.openPage(e, value, "edit")}>EDIT / DELETE</Button> :
                                             <div></div>
-                                        }
-                                    </div>
-                                    <div className={"col-sm-8"}>
-                                        {this.state.userName === "admin" ?
-                                            <Button variant="primary" style={{backgroundColor: '#333B3F', height: 50, width: 80}} onClick={(e) => this.openPage(e, value, "delete")}>DELETE</Button> :
-                                            <div></div>
-                                        }
-                                    </div>
+                                        } 
                                 </div>
                             </div>
+
+                        </div> :
+                        <div></div>
+                         }
+                        
                         </div>
                     )})}
                 </div>
@@ -225,6 +220,7 @@ class RoomListing extends React.Component {
                     onChange={this.handlePageChange}
                 />
             </div>
+        
         );
     }
 }

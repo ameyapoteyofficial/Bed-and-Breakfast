@@ -114,7 +114,7 @@ export default class UpdateRoom extends Component {
       .put("http://localhost:5000/api/admin/update/" + this.props.location.state.id, itemObject)
       .then((res) => {
         console.log(res.data);
-        console.log("Room details successfully updated");
+        alert("Room details successfully updated!!");
         this.props.history.push("/userHome");
       })
       .catch((error) => {
@@ -127,7 +127,7 @@ export default class UpdateRoom extends Component {
     axios
       .delete("http://localhost:5000/api/admin/delete/" + this.props.location.state.id)
       .then((res) => {
-        console.log("Room deleted succesfully!");
+        alert("Room deleted succesfully!");
         this.props.history.push("/userHome");
       })
       .catch((error) => {
@@ -242,7 +242,7 @@ export default class UpdateRoom extends Component {
             </Button>
 
             <Button onClick={this.deleteItem} variant="danger" size="lg" block="block">
-              Delete Item
+              Delete Room
             </Button>
           </Form>
         </div>
