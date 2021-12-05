@@ -24,10 +24,6 @@ class RoomInfo extends React.Component {
             e.preventDefault();
             this.props.history.push(EditRoom, {id: data._id});
         }
-        if(name === "delete") {
-            e.preventDefault();
-            this.props.history.push(DeleteRoom, {id: data._id});
-        }
     }
 
     updateCartInfo(data) {
@@ -98,14 +94,9 @@ class RoomInfo extends React.Component {
                             </div>
                             <div className={"row text-align-center mt-3"}>
                                 <div className={"col ml-2"}>
-                                    {this.state.userName === "admin" ?
-                                        <Button variant="primary" style={{backgroundColor: '#333B3F', height: 50, width: 200}} onClick={(e) => this.openPage(e, this.state.data, "edit")}>EDIT</Button> :
-                                        <div></div>
-                                    }
-                                </div>
-                                <div className={"col"}>
-                                    {this.state.userName === "admin" ?
-                                        <Button variant="primary" style={{backgroundColor: '#333B3F', height: 50, width: 200}} onClick={(e) => this.openPage(e, this.state.data, "delete")}>DELETE</Button> :
+                                    {
+                                       this.state.userName === "admin" ?
+                                        <Button variant="primary" style={{backgroundColor: '#333B3F', height: 50, width: 200}} onClick={(e) => this.openPage(e, this.state.data, "edit")}>EDIT/DELETE</Button> :
                                         <div></div>
                                     }
                                 </div>
