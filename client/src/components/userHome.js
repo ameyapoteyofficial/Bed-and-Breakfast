@@ -5,6 +5,7 @@ import Menu from "./menu";
 import { withRouter } from "react-router-dom";
 import { getUserEmail, getUserToken } from "./userTokens";
 import RoomListing from "./roomListing";
+import { Card, Button } from 'react-bootstrap';
 
 class UserHome extends Component{
     constructor(props) {
@@ -97,6 +98,9 @@ class UserHome extends Component{
                           }
                       }
                   }
+                  if(updatedData !== []){
+                    
+                  }
                   this.setState({
                       tempData: updatedData,
                   });
@@ -154,14 +158,29 @@ class UserHome extends Component{
                 style={{ marginLeft: 100, marginRight: 100 }}
               >
                 <div className="col-md-2">
+                  <span>Book From: </span>
                   <input
-                    type="text"
+                    type="date"
                     placeholder={"search"}
                     onChange={(event) => this.setState({searchText: event.target.value})}
                     onKeyDown={this.searchText}
                     value={this.state.searchText}
                     className={"border pl-2"}
                   />
+                  <br/>
+                  <br/>
+                  <span>Book Till: </span>
+                  <input
+                    type="date"
+                    placeholder={"search"}
+                    onChange={(event) => this.setState({searchText: event.target.value})}
+                    onKeyDown={this.searchText}
+                    value={this.state.searchText}
+                    className={"border pl-2"}
+                  />
+                  <br/>
+                  <br/>
+                  <Button variant="warning" style={{height: 40, }} >Search Rooms</Button>
                   <div className={"mt-5"}>
                     <h5>Room Type</h5>
                     <hr />

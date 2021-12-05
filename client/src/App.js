@@ -16,9 +16,11 @@ import {
   EditRoom,
   DeleteRoom,
   Favourites,
-  Success
+  Success,
+  ViewRoom
 } from './components/paths';
 import UpdateRoom from './components/updateroom';
+import Roominfo from './components/roominfo';
 
 function App() {
   return (
@@ -33,6 +35,7 @@ function App() {
         <Route exact path={EditRoom} component={UpdateRoom} />
         <Route exact path={Favourites} component={CartPage} />
         <Route exact path={Success} component={SuccessPage} />
+        <Route exact path={ViewRoom} component={Roominfo} />
        </Switch> 
       </Router>
 

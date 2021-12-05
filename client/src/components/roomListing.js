@@ -155,7 +155,7 @@ class RoomListing extends React.Component {
     }
 
     openProductPage(data) {
-        this.props.history.push("/productInfo",{ data: data, userName: this.state.userName, cartData: this.state.cartData });
+        this.props.history.push("/roomInfo",{ data: data, userName: this.state.userName, cartData: this.state.cartData });
     }
 
     render() {
@@ -179,7 +179,7 @@ class RoomListing extends React.Component {
                            
                             
                             <Card style={{ width: '19rem', border: 0 }} onClick={() => this.openProductPage(value)}>
-                                <Card.Img variant="top" src={value.Image} />
+                                <Card.Img  style={{height: 200, overflow: 'hidden'}} variant="top" src={value.Image} />
                                 <Card.Body style={{textAlign: 'center'}}>
                                     <Card.Text style={{height: 50, overflow: 'hidden'}}>{value.Name}</Card.Text>
                                     <Card.Text>
