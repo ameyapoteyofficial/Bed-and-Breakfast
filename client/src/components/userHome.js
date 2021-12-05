@@ -19,7 +19,9 @@ class UserHome extends Component{
             roomTypesChecked: [],
             costChecked: [],
             cost: ["All Price", "$1-$10", "$11-$30", "$30+"],
-            userName: "admin"
+            userName: "admin",
+            startDate: "",
+            endDate:""
         }
 
     }
@@ -161,10 +163,7 @@ class UserHome extends Component{
                   <span>Book From: </span>
                   <input
                     type="date"
-                    placeholder={"search"}
-                    onChange={(event) => this.setState({searchText: event.target.value})}
-                    onKeyDown={this.searchText}
-                    value={this.state.searchText}
+                    onChange={(event) => this.setState({startDate: event.target.value})}
                     className={"border pl-2"}
                   />
                   <br/>
@@ -172,10 +171,7 @@ class UserHome extends Component{
                   <span>Book Till: </span>
                   <input
                     type="date"
-                    placeholder={"search"}
-                    onChange={(event) => this.setState({searchText: event.target.value})}
-                    onKeyDown={this.searchText}
-                    value={this.state.searchText}
+                    onChange={(event) =>{ this.setState({endDate: event.target.value})}}
                     className={"border pl-2"}
                   />
                   <br/>
@@ -211,12 +207,14 @@ class UserHome extends Component{
                   <RoomListing
                     data={this.state.tempData}
                     userName={this.state.userName}
+                    startDate={this.state.startDate}
+                    endDate={this.state.endDate}
                   />
                 </div>
               </div>
             ) : (
               <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "100%"}}>
-                  <h1>Your Products are loading...</h1>
+                  <h1>Loading Data...</h1>
               </div>
             )}
             </div>

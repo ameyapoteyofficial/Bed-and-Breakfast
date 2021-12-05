@@ -20,7 +20,10 @@ class RoomListing extends React.Component {
             updatedData: this.props.data,
             userName: getUserEmail(),
             cartData: [],
+            startDate :this.props.startDate,
+            endDate:this.props.endDate
         };
+        
         this.handlePageChange = this.handlePageChange.bind(this);
         this.openProductPage = this.openProductPage.bind(this);
         this.updateCartInfo = this.updateCartInfo.bind(this);
@@ -30,6 +33,7 @@ class RoomListing extends React.Component {
     componentDidMount() {
         let tempData = [];
         let data = this.state.data;
+        
         if(this.state.data.length > 9) {
             for (var i = 0; i < 9; i++) {
                 tempData.push(data[i]);
@@ -64,6 +68,7 @@ class RoomListing extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        // alert(this.state.endDate);
         let tempData = [];
         let data = nextProps.data;
         if(nextProps.data.length > 9) {
@@ -79,7 +84,9 @@ class RoomListing extends React.Component {
         this.setState({
             data: nextProps.data,
             updatedData: tempData,
-            activePage: 1
+            activePage: 1,
+            startDate:nextProps.startDate,
+            endDate: nextProps.endDate
         });
         
     }
@@ -112,50 +119,51 @@ class RoomListing extends React.Component {
         
     }
 
-    updateCartInfo(data) {
-        const tempData = {
-            name: data.name,
-            id: data._id,
-            image: data.image,
-            price: data.price,
-            quantity: 1,
-        };
-        let tempFilterData = [];
-        console.log("data to push the add to cart:",this.state.cartData.products, data);
-        tempFilterData = this.state.cartData.products.filter((value) => value.id === data._id);
-        if(tempFilterData.length <= 0 || tempFilterData.length === undefined) {
-            console.log("hello");
-            axios
-                .put("http://localhost:4000/cart/addproduct/" + this.state.cartData._id, tempData, {headers: {"auth-token": getUserToken()}})
-                .then((res) => {
-                    console.log(res);
-                    console.log("Item successfully updated");
-                    fetch("http://localhost:4000/cart/",{
-                        method: 'GET',
-                        headers: {
-                            'Authorization': "Bearer "+getUserToken()
-                        },
-                    })
-                        .then((res) => res.json())
-                        .then((data) => {
-                            console.log("cart data is:", data);
-                            this.setState({
-                                cartData: data,
-                            })
-                        })
-                        .catch(console.log);
+    updateCartInfo() {
+        console.log("startDate: "+this.state.startDate);
+        // const tempData = {
+        //     name: data.name,
+        //     id: data._id,
+        //     image: data.image,
+        //     price: data.price,
+        //     quantity: 1,
+        // };
+        // let tempFilterData = [];
+        // console.log("data to push the add to cart:",this.state.cartData.products, data);
+        // tempFilterData = this.state.cartData.products.filter((value) => value.id === data._id);
+        // if(tempFilterData.length <= 0 || tempFilterData.length === undefined) {
+        //     console.log("hello");
+        //     axios
+        //         .put("http://localhost:5000/cart/" + this.state.cartData._id, tempData, {headers: {"Authorization": getUserToken()}})
+        //         .then((res) => {
+        //             console.log(res);
+        //             console.log("Item successfully updated");
+        //             fetch("http://localhost:4000/cart/",{
+        //                 method: 'GET',
+        //                 headers: {
+        //                     'Authorization': "Bearer "+getUserToken()
+        //                 },
+        //             })
+        //                 .then((res) => res.json())
+        //                 .then((data) => {
+        //                     console.log("cart data is:", data);
+        //                     this.setState({
+        //                         cartData: data,
+        //                     })
+        //                 })
+        //                 .catch(console.log);
 
-                    // Redirect to Homepage
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        }
+        //             // Redirect to Homepage
+        //         })
+        //         .catch((error) => {
+        //             console.log(error);
+        //         });
+        // }
        
     }
 
     openProductPage(data) {
-        this.props.history.push("/roomInfo",{ data: data, userName: this.state.userName, cartData: this.state.cartData });
+        this.props.history.push("/roomInfo",{ data: data, userName: this.state.userName, cartData: this.state.cartData, startDate: this.state.startDate, endDate: this.state.endDate });
     }
 
     render() {
@@ -190,7 +198,7 @@ class RoomListing extends React.Component {
                             <div style={{textAlign: "center", backgroundColor: "white"}} className={"pb-3"}>
                                 <div >
                                     {this.state.userName !== "admin" ?
-                                        <Button variant="primary" style={{backgroundColor: '#333B3F', height: 50}} onClick={()=>this.updateCartInfo(value)}>ADD TO FAVOURITES</Button> :
+                                        <Button variant="primary" style={{backgroundColor: '#333B3F', height: 50}} onClick={()=>this.updateCartInfo()}>ADD TO CART</Button> :
                                         <div></div>
                                     }
                                 </div>

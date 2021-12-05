@@ -12,7 +12,7 @@ class RoomInfo extends React.Component {
         this.state = {
             data: this.props.location.state.data,
             userName: getUserEmail(),
-            cartData: this.props.location.state.cartData
+            cartData: this.props.location.state.cartData,
         }
         this.openPage = this.openPage.bind(this);
         this.updateCartInfo = this.updateCartInfo.bind(this);
