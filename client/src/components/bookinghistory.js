@@ -73,7 +73,7 @@ class BookingHistoryPage extends Component {
                                         <th>Start Date</th>
                                         <th>End Date</th>
                                         <th>Booking Date</th>
-                                        <th>Price</th>
+                                        <th>Total Cost</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -92,7 +92,7 @@ class BookingHistoryPage extends Component {
                                                 <td>{this.getFormattedDate(item.StartDate)}</td>
                                                 <td>{this.getFormattedDate(item.EndDate)}</td>
                                                 <td>{this.getFormattedDate(item.createdAt)}</td>
-                                                <td>{item.Room.Price}</td>
+                                                <td>${item.Room.Price}</td>
                                             </tr>
                                         );
                                     })}
