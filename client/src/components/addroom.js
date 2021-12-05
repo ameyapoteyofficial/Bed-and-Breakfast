@@ -206,7 +206,7 @@ export default class Add extends Component {
             </Form.Group>
            
 
-            <Button variant="danger" size="lg" block="block" type="submit">
+            <Button className={"mt-3 mb-3"} variant="danger" align="center"  size="lg" block="block" type="submit">
               Add Room
             </Button>
           </Form>

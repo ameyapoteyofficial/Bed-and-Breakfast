@@ -237,11 +237,11 @@ export default class UpdateRoom extends Component {
               </Form.Control>
             </Form.Group>
 
-            <Button variant="danger" size="lg" block="block" type="submit">
+            <Button className={"mt-3 mb-3 mr-3"} variant="danger" size="lg" block="block" type="submit">
               Update Room
             </Button>
 
-            <Button onClick={this.deleteItem} variant="danger" size="lg" block="block">
+            <Button className={"mt-3 mb-3"} onClick={this.deleteItem} variant="danger" size="lg" block="block">
               Delete Room
             </Button>
           </Form>

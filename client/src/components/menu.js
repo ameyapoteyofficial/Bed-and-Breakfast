@@ -96,10 +96,10 @@ import {
                   )}
                   {this.state.userName !== "admin" ? (
                  <div>
-                 <div>
+                   <ul className="navbar-nav mr-auto">
                   <li className="nav-item">
                     <a className="nav-link" onClick={this.shoppingCart}>
-                      FAVOURITES
+                      CART
                     </a>
                   </li>
                   <li className="nav-item">
@@ -107,7 +107,8 @@ import {
                       BOOKING HISTORY
                     </a>
                   </li>
-                  </div></div>
+                  </ul>
+                  </div>
                   ) : (
                     <div></div>
                   )}
