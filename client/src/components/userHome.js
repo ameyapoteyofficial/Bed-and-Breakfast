@@ -15,13 +15,15 @@ class UserHome extends Component{
             searchText: "",
             tempData: [],
             updated: false,
-            roomTypes: ["Deluxe", "Excecutive", "Presidential"],
+            roomTypes: ["Deluxe", "Executive", "Presidential"],
             roomTypesChecked: [],
             costChecked: [],
             cost: ["All Price", "$1-$10", "$11-$30", "$30+"],
             userName: "admin",
             startDate: "",
-            endDate:""
+            endDate:"",
+            searchedData:[],
+            filteredData :[]
         }
 
     }
@@ -32,7 +34,7 @@ class UserHome extends Component{
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log("Admin data is:"+ data);
+            
             this.setState({
               data: data,
               tempData: data,
@@ -63,7 +65,9 @@ class UserHome extends Component{
        
     }
     handleCheckbox = (e, s, category) => {
-      if(this.state.searchText !== "") {
+      
+      if(this.state.startDate !== "") {
+          
           let checkedBoxes = [...this.state.roomTypesChecked];
           if (e.target.checked) {
               checkedBoxes.push(s);
@@ -76,40 +80,45 @@ class UserHome extends Component{
           } else {
               const index = checkedBoxes.findIndex((ch) => ch === s);
               checkedBoxes.splice(index, 1);
+              console.log("length: "+ checkedBoxes.length)
           }
           console.log("Checked Boxes: "+checkedBoxes);
           this.setState({roomTypesChecked: checkedBoxes});
           let updatedData = [];
           var old_data = this.state.data;
-          console.log(checkedBoxes);
+          console.log(checkedBoxes +checkedBoxes.length);
           if (checkedBoxes.length <= 0 || checkedBoxes.length === undefined) {
-              const tempValue = this.state.data.filter((value) =>
-                  value.Category.toLowerCase().includes(this.state.searchText.toLowerCase())
-              );
-              this.setState({
-                  tempData: tempValue,
-                  updated: !this.state.updated,
-                  searchText: this.state.searchText
-              });
+              // const tempValue = this.state.data.filter((value) =>
+              //     value.Category.toLowerCase().includes(this.state.searchText.toLowerCase())
+              // );
+              // this.setState({
+              //     tempData: tempValue,
+              //     updated: !this.state.updated,
+              //     searchText: this.state.searchText
+              // });
+              this.setState({tempData: this.state.searchedData});
+              
+              
           } else {
               if (s !== "All departments") {
                   for (var i = 0; i < checkedBoxes.length; i++) {
-                      for (var j = 0; j < this.state.tempData.length; j++) {
-                          if (checkedBoxes[i] === this.state.tempData[j].category) {
-                              updatedData.push(this.state.tempData[j]);
+                      for (var j = 0; j < this.state.searchedData.length; j++) {
+                        
+                          if (checkedBoxes[i] === this.state.searchedData[j].Category && this.state.searchedData[j].Deleted === false) {
+                              updatedData.push(this.state.searchedData[j]);
                           }
                       }
                   }
-                  if(updatedData !== []){
-                    
-                  }
+                  
                   this.setState({
                       tempData: updatedData,
+                      filteredData: updatedData
                   });
               }
           }
       }
       else {
+        
           let checkedBoxes = [...this.state.roomTypesChecked];
           if (e.target.checked) {
               checkedBoxes.push(s);
@@ -136,7 +145,8 @@ class UserHome extends Component{
                   for (var i = 0; i < checkedBoxes.length; i++) {
                       for (var j = 0; j < this.state.data.length; j++) {
                         console.log(checkedBoxes[i]+" "+this.state.data[j].Category);
-                          if (checkedBoxes[i] === this.state.data[j].Category) {
+                          if (checkedBoxes[i] === this.state.data[j].Category && this.state.data[j].Deleted === false) {
+                            
                               updatedData.push(this.state.data[j]);
                           }
                       }
@@ -144,17 +154,116 @@ class UserHome extends Component{
                   
                   this.setState({
                       tempData: updatedData,
+                      filteredData: updatedData
                   });
               }
           }
       }
+};
+handleSearch = () => {
+  let startDate = new Date(this.state.startDate);
+  let endDate = new Date(this.state.endDate);
+  var roomIds =[];
+  var updatedObject =[];
+  if(this.state.startDate === "" || this.state.endDate==="" ||endDate < startDate || startDate < new Date()){
+            alert("Invalid Date Range!!");
+    }
+    if(this.state.roomTypesChecked.length === 0){
+      for (let j = 0; j < this.state.data.length; j++) {
+        
+        if(this.state.data[j].Deleted === false){
+          roomIds.push(this.state.data[j]._id);
+        }
+        
+    }
+    const searchObject = {
+      array : roomIds,
+      startDate : this.state.startDate,
+      endDate: this.state.endDate
+  }
+
+  axios.post("http://localhost:5000/api/registration/filtered", searchObject).then((res) => {
+            if (res.status === 200) {
+              console.log(res.data);
+              for (let i = 0; i < this.state.data.length; i++) {
+                
+                  if( res.data.includes(this.state.data[i]._id) &&this.state.data[i].Deleted=== false){
+                    
+                    updatedObject.push(this.state.data[i]);
+                  }
+              }
+              this.setState({
+                tempData: updatedObject,
+                searchedData: updatedObject
+              });
+            } else {
+              
+
+              return;
+            }
+          }).catch(err => {
+            if (err.response) {
+              alert("Invalid Search Query!!");
+            } else if (err.request) {
+              // client never received a response, or request never left
+            } else {
+              // anything else
+            }
+        });
+
+    }
+    else{
+      for (let j = 0; j < this.state.filteredData.length; j++) {
+        
+        if(this.state.filteredData[j].Deleted === false){
+          roomIds.push(this.state.filteredData[j]._id);
+        }
+        
+    }
+    const searchObject = {
+      array : roomIds,
+      startDate : this.state.startDate,
+      endDate: this.state.endDate
+  }
+
+  axios.post("http://localhost:5000/api/registration/filtered", searchObject).then((res) => {
+            if (res.status === 200) {
+              
+              for (let i = 0; i < this.state.filteredData.length; i++) {
+                
+                  if( res.data.includes(this.state.filteredData[i]._id) &&this.state.filteredData[i].Deleted=== false){
+                    
+                    updatedObject.push(this.state.filteredData[i]);
+                  }
+              }
+              this.setState({
+                tempData: updatedObject,
+                searchedData: updatedObject
+              });
+            } else {
+              
+
+              return;
+            }
+          }).catch(err => {
+            if (err.response) {
+              alert("Invalid Search Query!!");
+            } else if (err.request) {
+              // client never received a response, or request never left
+            } else {
+              // anything else
+            }
+        });
+
+    }
+    
 };
 
     render(){
         return(
             <div>
               <Menu userName={this.state.userName} style={{display: "fixed", top: 0}}/>
-              {this.state.tempData.length !== 0 ? (
+              
               <div
                 className="row mt-5 mb-5"
                 style={{ marginLeft: 100, marginRight: 100 }}
@@ -176,7 +285,7 @@ class UserHome extends Component{
                   />
                   <br/>
                   <br/>
-                  <Button variant="warning" style={{height: 40, }} >Search Rooms</Button>
+                  <Button variant="warning" style={{height: 40, }} onClick={(e) => this.handleSearch()}>Search Rooms</Button>
                   <div className={"mt-5"}>
                     <h5>Room Type</h5>
                     <hr />
@@ -202,6 +311,7 @@ class UserHome extends Component{
                     </div>
                   </div>
                 </div>
+                
                 <div className="col-md-10">
                   {/* <Samplecarousel /> */}
                   <RoomListing
@@ -211,12 +321,9 @@ class UserHome extends Component{
                     endDate={this.state.endDate}
                   />
                 </div>
+                
               </div>
-            ) : (
-              <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "100%"}}>
-                  <h1>Loading Data...</h1>
-              </div>
-            )}
+            
             </div>
         )
     }

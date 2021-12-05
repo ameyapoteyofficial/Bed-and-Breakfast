@@ -44,7 +44,7 @@ registrationRoute.get('/',  asyncHandler(async (req,res) => {
 // })
 // );
 
-registrationRoute.get('/filtered',  asyncHandler(async (req,res) => {
+registrationRoute.post('/filtered',  asyncHandler(async (req,res) => {
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
     const roomArray = req.body.array;

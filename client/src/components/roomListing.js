@@ -120,7 +120,12 @@ class RoomListing extends React.Component {
     }
 
     updateCartInfo() {
-        console.log("startDate: "+this.state.startDate);
+        // console.log("startDate: "+this.state.startDate);
+        let startDate = new Date(this.state.startDate);
+        let endDate = new Date(this.state.endDate);
+        if(endDate < startDate || startDate < new Date()){
+            alert("Invalid Date Range!!");
+        }
         // const tempData = {
         //     name: data.name,
         //     id: data._id,
