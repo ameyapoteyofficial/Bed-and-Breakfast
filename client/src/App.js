@@ -4,6 +4,8 @@ import LoginPage from './components/login';
 import RegisterPage from './components/register';
 import UserHome  from "./components/userHome";
 import Add from "./components/addroom";
+import CartPage from './components/cart';
+import SuccessPage from './components/success';
 
 import {
   Login,
@@ -13,6 +15,8 @@ import {
   AddRoom,
   EditRoom,
   DeleteRoom,
+  Favourites,
+  Success
 } from './components/paths';
 import UpdateRoom from './components/updateroom';
 
@@ -27,6 +31,8 @@ function App() {
         <Route exact path={Home} component={UserHome} />
         <Route exact path={AddRoom} component={Add} />
         <Route exact path={EditRoom} component={UpdateRoom} />
+        <Route exact path={Favourites} component={CartPage} />
+        <Route exact path={Success} component={SuccessPage} />
        </Switch> 
       </Router>
 

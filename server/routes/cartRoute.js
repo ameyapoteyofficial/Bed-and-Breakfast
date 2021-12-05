@@ -6,11 +6,7 @@ const error = require('../middleware/errorMiddlewareHandler');
 const asyncHandler = require('express-async-handler');
 
 cartRoute.get('/getUserCarts', authMiddleWare, asyncHandler(async (req,res) => {
-    const userID = req.body.UserID;
-    if(! req.user._id.equals(userID)){
-        res.status(500);
-        throw new Error('User mismatch!');
-    }
+    const userID = req.user._id;
 
     const carts = await Cart.find({'UserID':userID});
     if(carts){
