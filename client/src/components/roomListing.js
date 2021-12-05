@@ -191,7 +191,7 @@ class RoomListing extends React.Component {
                                 <Card.Body style={{textAlign: 'center'}}>
                                     <Card.Text style={{height: 50, overflow: 'hidden'}}>{value.Name}</Card.Text>
                                     <Card.Text>
-                                        ${value.Price}
+                                        ${value.Price} / Night
                                     </Card.Text>
                                 </Card.Body>
                             </Card>

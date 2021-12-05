@@ -160,7 +160,7 @@ class UserHome extends Component{
                 style={{ marginLeft: 100, marginRight: 100 }}
               >
                 <div className="col-md-2">
-                  <span>Book From: </span>
+                  <span>Check-in Date: </span>
                   <input
                     type="date"
                     onChange={(event) => this.setState({startDate: event.target.value})}
@@ -168,7 +168,7 @@ class UserHome extends Component{
                   />
                   <br/>
                   <br/>
-                  <span>Book Till: </span>
+                  <span>Check-out Date: </span>
                   <input
                     type="date"
                     onChange={(event) =>{ this.setState({endDate: event.target.value})}}

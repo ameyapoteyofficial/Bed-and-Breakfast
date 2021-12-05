@@ -193,7 +193,7 @@ export default class UpdateRoom extends Component {
             </Form.Group>
 
             <Form.Group controlId="Image">
-              <Form.Label>Image</Form.Label>
+              <Form.Label>Image URL</Form.Label>
               <Form.Control
                 type="text"
                 onChange={this.onChangeItemImage}

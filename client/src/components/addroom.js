@@ -101,6 +101,7 @@ export default class Add extends Component {
         maximum: "",
         bedtype: "",
     });
+    this.props.history.push("/userHome");
   }
 
   render() {
@@ -161,7 +162,7 @@ export default class Add extends Component {
             </Form.Group>
 
             <Form.Group controlId="Image">
-              <Form.Label>Image</Form.Label>
+              <Form.Label>Image URL</Form.Label>
               <Form.Control
                 type="text"
                 onChange={this.onChangeItemImage}
@@ -197,10 +198,10 @@ export default class Add extends Component {
                 custom
               >
                 <option value="0">Choose...</option>
-                <option value="Standard">Standard</option>
                 <option value="Deluxe">Deluxe</option>
-                <option value="Super Deluxe">
-                Super Deluxe
+                <option value="Executive">Executive</option>
+                <option value="Presidential">
+                Presidential
                 </option>
               </Form.Control>
             </Form.Group>
