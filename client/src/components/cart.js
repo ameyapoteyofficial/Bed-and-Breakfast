@@ -48,7 +48,6 @@ class CartPage extends Component {
                 if (res.data !== null) {
                     res.data.forEach((item) => {
                         total = total + this.getTotalPrice(item.StartDate,item.EndDate,item.Room.Price);
-                        
                     })
                 }
                 this.setState({
@@ -158,7 +157,8 @@ class CartPage extends Component {
                                 <th>Name</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
-                                <th>Price</th>
+                                <th>Cost / Night</th>
+                                <th>Total Cost</th>
                                 <th> Action </th>
                             </tr>
                         </thead>
@@ -170,6 +170,7 @@ class CartPage extends Component {
                                         <td>{item.Room.Name}</td>
                                         <td>{item.StartDate.substring(0,10)}</td>
                                         <td>{item.EndDate.substring(0,10)}</td>
+                                        <td>${item.Room.Price}</td>
                                         <td>${this.getTotalPrice(item.StartDate,item.EndDate,item.Room.Price)}</td>
                                         <td>
                                             <button
@@ -186,6 +187,7 @@ class CartPage extends Component {
                             })}
 
                             <tr id="total">
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
