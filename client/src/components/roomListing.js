@@ -124,30 +124,33 @@ class RoomListing extends React.Component {
             alert("please select start and end date");
             this.props.history.push("/userHome");
         }
+        else{
+            const objectData = {
+                Room: data,
+                StartDate: this.state.startDate,
+                EndDate: this.state.endDate,
+                UserID: getUserId(),
+            };
+                axios.post("http://localhost:5000/api/cart/", objectData, {
+                    headers: { "Authorization": "Bearer " + getUserToken() }
+                }).then((res) => {
+                    if (res.status === 200){
+                        console.log(res);
+                        alert("Room added in to the cart");
+                        this.props.history.push("/favourites");
+                    }
+                    else{
+                            alert("error in adding room to the cart"+ res.json);
+                            return;
+                    }
+                }).catch(err => {
+                    if (err.response) {
+                      alert("There is some error in adding the room to cart!!");
+                    } 
+                });
+        }
 
-        const objectData = {
-            Room: data,
-            StartDate: this.state.startDate,
-            EndDate: this.state.endDate,
-            UserID: getUserId(),
-        };
-            axios.post("http://localhost:5000/api/cart/", objectData, {
-                headers: { "Authorization": "Bearer " + getUserToken() }
-            }).then((res) => {
-                if (res.status === 200){
-                    console.log(res);
-                    alert("Room added in to the cart");
-                    this.props.history.push("/favourites");
-                }
-                else{
-                        alert("error in adding room to the cart"+ res.json);
-                        return;
-                }
-            }).catch(err => {
-                if (err.response) {
-                  alert("There is some error in adding the room to cart!!");
-                } 
-            });
+       
     }
 
 
