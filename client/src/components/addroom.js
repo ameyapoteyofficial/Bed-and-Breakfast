@@ -109,14 +109,11 @@ export default class Add extends Component {
       <>
         <Menu userName={this.state.userName} />
 
-        <div className="form-wrapper container" style={{ marginTop: "50px" }}>
-          <h2 className="title1" align="center">
-            {" "}
-            Add Room{" "}
-          </h2>
+        <div className="form-wrapper container mt-2">
+          <h3 className="title1" align="center">Add Room</h3>
           <Form onSubmit={this.onSubmit}>
            
-            <Form.Group controlId="Name">
+            <Form.Group controlId="Name" className="mb-2">
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
@@ -125,7 +122,7 @@ export default class Add extends Component {
               />
             </Form.Group>
 
-            <Form.Group controlId="Quantity">
+            <Form.Group controlId="Quantity" className="mb-2">
               <Form.Label>No of Beds</Form.Label>
               <Form.Control
                 type="text"
@@ -134,7 +131,7 @@ export default class Add extends Component {
               />
             </Form.Group>
 
-            <Form.Group controlId="Area">
+            <Form.Group controlId="Area" className="mb-2">
               <Form.Label>Area (in Sq ft)</Form.Label>
               <Form.Control
                 type="text"
@@ -143,7 +140,7 @@ export default class Add extends Component {
               />
             </Form.Group>
 
-            <Form.Group controlId="Maximum_occupancy">
+            <Form.Group controlId="Maximum_occupancy" className="mb-2">
               <Form.Label>Max Occupancy</Form.Label>
               <Form.Control
                 type="text"
@@ -152,7 +149,7 @@ export default class Add extends Component {
               />
             </Form.Group>
 
-            <Form.Group controlId="Bed_type">
+            <Form.Group controlId="Bed_type" className="mb-2">
               <Form.Label>Bed Type</Form.Label>
               <Form.Control
                 type="text"
@@ -161,7 +158,7 @@ export default class Add extends Component {
               />
             </Form.Group>
 
-            <Form.Group controlId="Image">
+            <Form.Group controlId="Image" className="mb-2">
               <Form.Label>Image URL</Form.Label>
               <Form.Control
                 type="text"
@@ -170,7 +167,7 @@ export default class Add extends Component {
               />
             </Form.Group>
 
-            <Form.Group controlId="Price">
+            <Form.Group controlId="Price" className="mb-2">
               <Form.Label>Price</Form.Label>
               <Form.Control
                 type="text"
@@ -179,7 +176,7 @@ export default class Add extends Component {
               />
             </Form.Group>
 
-            <Form.Group controlId="Description">
+            <Form.Group controlId="Description" className="mb-2">
               <Form.Label>Description</Form.Label>
               <Form.Control
                 type="text"
@@ -188,7 +185,7 @@ export default class Add extends Component {
               />
             </Form.Group>
 
-            <Form.Group controlId="Category">
+            <Form.Group controlId="Category" className="mb-2">
               <Form.Label>Category</Form.Label>
               <Form.Control
                 as="select"
@@ -200,14 +197,12 @@ export default class Add extends Component {
                 <option value="0">Choose...</option>
                 <option value="Deluxe">Deluxe</option>
                 <option value="Executive">Executive</option>
-                <option value="Presidential">
-                Presidential
-                </option>
+                <option value="Presidential">Presidential</option>
               </Form.Control>
             </Form.Group>
            
 
-            <Button className={"mt-3 mb-3"} variant="danger" align="center"  size="lg" block="block" type="submit">
+            <Button className={"mt-3 mb-2"} variant="danger" align="center"  size="lg" block="block" type="submit">
               Add Room
             </Button>
           </Form>

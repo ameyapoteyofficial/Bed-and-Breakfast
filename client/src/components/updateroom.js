@@ -140,14 +140,11 @@ export default class UpdateRoom extends Component {
       <>
         <Menu userName={this.state.userName} />
 
-        <div className="form-wrapper container" style={{ marginTop: "50px" }}>
-          <h2 className="title1" align="center">
-            {" "}
-            Update / Delete Room{" "}
-          </h2>
+        <div className="form-wrapper container mt-2">
+          <h3 className="title1" align="center">Update / Delete Room</h3>
           <Form onSubmit={this.onSubmit}>
             
-          <Form.Group controlId="Name">
+          <Form.Group controlId="Name" className="mb-2">
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
@@ -156,7 +153,7 @@ export default class UpdateRoom extends Component {
               />
             </Form.Group>
 
-            <Form.Group controlId="Quantity">
+            <Form.Group controlId="Quantity" className="mb-2">
               <Form.Label>No of Beds</Form.Label>
               <Form.Control
                 type="text"
@@ -165,7 +162,7 @@ export default class UpdateRoom extends Component {
               />
             </Form.Group>
 
-            <Form.Group controlId="Area">
+            <Form.Group controlId="Area" className="mb-2">
               <Form.Label>Area (in Sq ft)</Form.Label>
               <Form.Control
                 type="text"
@@ -174,7 +171,7 @@ export default class UpdateRoom extends Component {
               />
             </Form.Group>
 
-            <Form.Group controlId="Maximum_occupancy">
+            <Form.Group controlId="Maximum_occupancy" className="mb-2">
               <Form.Label>Max Occupancy</Form.Label>
               <Form.Control
                 type="text"
@@ -183,7 +180,7 @@ export default class UpdateRoom extends Component {
               />
             </Form.Group>
 
-            <Form.Group controlId="Bed_type">
+            <Form.Group controlId="Bed_type" className="mb-2">
               <Form.Label>Bed Type</Form.Label>
               <Form.Control
                 type="text"
@@ -192,7 +189,7 @@ export default class UpdateRoom extends Component {
               />
             </Form.Group>
 
-            <Form.Group controlId="Image">
+            <Form.Group controlId="Image" className="mb-2">
               <Form.Label>Image URL</Form.Label>
               <Form.Control
                 type="text"
@@ -201,7 +198,7 @@ export default class UpdateRoom extends Component {
               />
             </Form.Group>
 
-            <Form.Group controlId="Price">
+            <Form.Group controlId="Price" className="mb-2">
               <Form.Label>Price</Form.Label>
               <Form.Control
                 type="text"
@@ -210,7 +207,7 @@ export default class UpdateRoom extends Component {
               />
             </Form.Group>
 
-            <Form.Group controlId="Description">
+            <Form.Group controlId="Description" className="mb-2">
               <Form.Label>Description</Form.Label>
               <Form.Control
                 type="text"
@@ -219,7 +216,7 @@ export default class UpdateRoom extends Component {
               />
             </Form.Group>
 
-            <Form.Group controlId="Category">
+            <Form.Group controlId="Category" className="mb-2">
               <Form.Label>Category</Form.Label>
               <Form.Control
                 as="select"
@@ -229,19 +226,17 @@ export default class UpdateRoom extends Component {
                 custom
               >
                 <option value="0">Choose...</option>
-                <option value="Standard">Standard</option>
                 <option value="Deluxe">Deluxe</option>
-                <option value="Super Deluxe">
-                Super Deluxe
-                </option>
+                <option value="Executive">Executive</option>
+                <option value="Presidential">Presidential</option>
               </Form.Control>
             </Form.Group>
 
-            <Button className={"mt-3 mb-3 mr-3"} variant="danger" size="lg" block="block" type="submit">
+            <Button className={"mt-3 mb-2 mr-3"} variant="danger" size="lg" block="block" type="submit">
               Update Room
             </Button>
 
-            <Button className={"mt-3 mb-3"} onClick={this.deleteItem} variant="danger" size="lg" block="block">
+            <Button className={"mt-3 mb-2"} onClick={this.deleteItem} variant="danger" size="lg" block="block">
               Delete Room
             </Button>
           </Form>

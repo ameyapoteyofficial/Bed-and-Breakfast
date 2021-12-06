@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 
 function Formcontent(props){
     return(
-        <div>
+        <div className="mb-3">
             <Form.Group id={props.id}>
                 <Form.Label>{props.label}</Form.Label>
                 <Form.Control type={props.type} value={props.value} onChange={props.onChange} 
