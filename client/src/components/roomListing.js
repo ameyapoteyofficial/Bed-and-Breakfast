@@ -7,7 +7,7 @@ import {
     useHistory,
     withRouter
 } from "react-router-dom";
-import { getUserEmail, getUserToken } from "./userTokens";
+import { getUserEmail, getUserId, getUserToken } from "./userTokens";
 import axios from "axios";
 
 
@@ -119,53 +119,37 @@ class RoomListing extends React.Component {
         
     }
 
-    updateCartInfo() {
-        // console.log("startDate: "+this.state.startDate);
-        let startDate = new Date(this.state.startDate);
-        let endDate = new Date(this.state.endDate);
-        if(endDate < startDate || startDate < new Date()){
-            alert("Invalid Date Range!!");
+    updateCartInfo(data) {
+        if(this.state.startDate === "" || this.state.endDate ===""){
+            alert("please select start and end date");
+            this.props.history.push("/userHome");
         }
-        // const tempData = {
-        //     name: data.name,
-        //     id: data._id,
-        //     image: data.image,
-        //     price: data.price,
-        //     quantity: 1,
-        // };
-        // let tempFilterData = [];
-        // console.log("data to push the add to cart:",this.state.cartData.products, data);
-        // tempFilterData = this.state.cartData.products.filter((value) => value.id === data._id);
-        // if(tempFilterData.length <= 0 || tempFilterData.length === undefined) {
-        //     console.log("hello");
-        //     axios
-        //         .put("http://localhost:5000/cart/" + this.state.cartData._id, tempData, {headers: {"Authorization": getUserToken()}})
-        //         .then((res) => {
-        //             console.log(res);
-        //             console.log("Item successfully updated");
-        //             fetch("http://localhost:4000/cart/",{
-        //                 method: 'GET',
-        //                 headers: {
-        //                     'Authorization': "Bearer "+getUserToken()
-        //                 },
-        //             })
-        //                 .then((res) => res.json())
-        //                 .then((data) => {
-        //                     console.log("cart data is:", data);
-        //                     this.setState({
-        //                         cartData: data,
-        //                     })
-        //                 })
-        //                 .catch(console.log);
 
-        //             // Redirect to Homepage
-        //         })
-        //         .catch((error) => {
-        //             console.log(error);
-        //         });
-        // }
-       
+        const objectData = {
+            Room: data,
+            StartDate: this.state.startDate,
+            EndDate: this.state.endDate,
+            UserID: getUserId(),
+        };
+            axios.post("http://localhost:5000/api/cart/", objectData, {
+                headers: { "Authorization": "Bearer " + getUserToken() }
+            }).then((res) => {
+                if (res.status === 200){
+                    console.log(res);
+                    alert("Room added in to the cart");
+                    this.props.history.push("/favourites");
+                }
+                else{
+                        alert("error in adding room to the cart"+ res.json);
+                        return;
+                }
+            }).catch(err => {
+                if (err.response) {
+                  alert("There is some error in adding the room to cart!!");
+                } 
+            });
     }
+
 
     openProductPage(data) {
         this.props.history.push("/roomInfo",{ data: data, userName: this.state.userName, cartData: this.state.cartData, startDate: this.state.startDate, endDate: this.state.endDate });
@@ -203,7 +187,7 @@ class RoomListing extends React.Component {
                             <div style={{textAlign: "center", backgroundColor: "white"}} className={"pb-3"}>
                                 <div >
                                     {this.state.userName !== "admin" ?
-                                        <Button variant="primary" style={{backgroundColor: '#333B3F', height: 50}} onClick={()=>this.updateCartInfo()}>ADD TO CART</Button> :
+                                        <Button variant="primary" style={{backgroundColor: '#333B3F', height: 50}} onClick={()=>this.updateCartInfo(value)}>ADD TO CART</Button> :
                                         <div></div>
                                     }
                                 </div>

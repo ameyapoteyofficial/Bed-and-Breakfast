@@ -29,34 +29,50 @@ class RoomInfo extends React.Component {
     }
 
     updateCartInfo(data) {
-        if(this.state.startDate === "" || this.state.endDate ===""){
-            alert("please select start and end date");
-            this.props.history.push("/userHome");
+
+        if(this.state.endDate < this.state.startDate){
+            alert("Invalid Date Range!!");
+         }
+        else if(this.state.startDate === ""){
+            alert("Please select the start date before proceeding!!");
+        }
+        else if(this.state.endDate === ""){
+            alert("Please select the end date before proceeding!!");
+        }
+        else if(this.state.startDate < new Date()){
+            alert("You cant book for a previous Date!!");
+        }
+        // if(this.state.startDate === "" || this.state.endDate ===""){
+        //     alert("please select start and end date");
+        //     this.props.history.push("/userHome");
+        // }
+        else{
+            const objectData = {
+                Room: data,
+                StartDate: this.state.startDate,
+                EndDate: this.state.endDate,
+                UserID: this.state.userID,
+            };
+                axios.post("http://localhost:5000/api/cart/", objectData, {
+                    headers: { "Authorization": "Bearer " + getUserToken() }
+                }).then((res) => {
+                    if (res.status === 200){
+                        console.log(res);
+                        alert("Room added in to the cart");
+                        this.props.history.push("/favourites");
+                    }
+                    else{
+                            alert("error in adding room to the cart"+ res.json);
+                            return;
+                    }
+                }).catch(err => {
+                    if (err.response) {
+                      alert("There is some error in adding the room to cart!!");
+                    } 
+                });
         }
 
-        const objectData = {
-            Room: data,
-            StartDate: this.state.startDate,
-            EndDate: this.state.endDate,
-            UserID: this.state.userID,
-        };
-            axios.post("http://localhost:5000/api/cart/", objectData, {
-                headers: { "Authorization": "Bearer " + getUserToken() }
-            }).then((res) => {
-                if (res.status === 200){
-                    console.log(res);
-                    alert("Room added in to the cart");
-                    this.props.history.push("/favourites");
-                }
-                else{
-                        alert("error in adding room to the cart"+ res.json);
-                        return;
-                }
-            }).catch(err => {
-                if (err.response) {
-                  alert("There is some error in adding the room to cart!!");
-                } 
-            });
+        
     }
 
     render() {
@@ -84,7 +100,7 @@ class RoomInfo extends React.Component {
                             </div>
                             <div>
                                 {this.state.data.Deleted === false && this.state.userName !== "admin" ?
-                                    <Button variant="primary" style={{backgroundColor: '#333B3F', height: 50, width: 500}} onClick={()=>this.updateCartInfo(this.state.data)}>ADD TO FAVOURITES</Button> :
+                                    <Button variant="primary" style={{backgroundColor: '#333B3F', height: 50, width: 500}} onClick={()=>this.updateCartInfo(this.state.data)}>ADD TO CART</Button> :
                                     <div></div>
                                 }
                             </div>

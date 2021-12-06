@@ -177,6 +177,7 @@ handleSearch = () => {
   else if(startDate < new Date()){
     alert("You cant book for a previous Date!!");
   }
+  else{
     if(this.state.roomTypesChecked.length === 0){
       for (let j = 0; j < this.state.data.length; j++) {
         
@@ -265,6 +266,8 @@ handleSearch = () => {
         });
 
     }
+    
+  }
     
 };
 
