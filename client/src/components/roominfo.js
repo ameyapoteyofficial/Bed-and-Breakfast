@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {withRouter} from "react-router-dom";
 import Menu from "./menu";
 import {Button, Card} from "react-bootstrap";
-import {getUserToken, getUserEmail} from "./userTokens";
+import {getUserToken, getUserEmail, getUserId} from "./userTokens";
 import {DeleteRoom, EditRoom} from "./paths";
 import axios from "axios";
 
@@ -12,7 +12,9 @@ class RoomInfo extends React.Component {
         this.state = {
             data: this.props.location.state.data,
             userName: getUserEmail(),
-            cartData: this.props.location.state.cartData,
+            startDate: this.props.location.state.startDate,
+            endDate: this.props.location.state.endDate,
+            userID: getUserId(),
         }
         this.openPage = this.openPage.bind(this);
         this.updateCartInfo = this.updateCartInfo.bind(this);
@@ -27,44 +29,34 @@ class RoomInfo extends React.Component {
     }
 
     updateCartInfo(data) {
-        const tempData = {
-            name: data.name,
-            id: data._id,
-            image: data.image,
-            price: data.price,
-            quantity: 1,
-        };
-        let tempFilterData = [];
-        tempFilterData = this.state.cartData.products.filter((value) => value.id === data._id);
-        if(tempFilterData.length <= 0 || tempFilterData.length === undefined) {
-            console.log("hello");
-            axios
-                .put("http://localhost:4000/cart/addproduct/" + this.state.cartData._id, tempData, {headers: {"auth-token": getUserToken()}})
-                .then((res) => {
-                    console.log(res);
-                    console.log("Item successfully updated");
-
-                    fetch("http://localhost:4000/cart/",{
-                        method: 'GET',
-                        headers: {
-                            'auth-token': getUserToken()
-                        },
-                    })
-                        .then((res) => res.json())
-                        .then((data) => {
-                            console.log("cart data is:", data);
-                            this.setState({
-                                cartData: data,
-                            })
-                        })
-                        .catch(console.log);
-
-                    // Redirect to Homepage
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+        if(this.state.startDate === "" || this.state.endDate ===""){
+            alert("please select start and end date");
+            this.props.history.push("/userHome");
         }
+
+        const objectData = {
+            Room: data,
+            StartDate: this.state.startDate,
+            EndDate: this.state.endDate,
+            UserID: this.state.userID,
+        };
+            axios.post("http://localhost:5000/api/cart/", objectData, {
+                headers: { "Authorization": "Bearer " + getUserToken() }
+            }).then((res) => {
+                if (res.status === 200){
+                    console.log(res);
+                    alert("Room added in to the cart");
+                    this.props.history.push("/favourites");
+                }
+                else{
+                        alert("error in adding room to the cart"+ res.json);
+                        return;
+                }
+            }).catch(err => {
+                if (err.response) {
+                  alert("There is some error in adding the room to cart!!");
+                } 
+            });
     }
 
     render() {
@@ -85,6 +77,10 @@ class RoomInfo extends React.Component {
                                 <p className={"mb-5"}>{this.state.data.Description}</p>
                                 <h5 className={"mb-1"}>Price:</h5>
                                 <p className={"mb-5"}>${this.state.data.Price}</p>
+                                <h5 className={"mb-1"}>Start Date:</h5>
+                                <p className={"mb-5"}>{this.state.startDate}</p>
+                                <h5 className={"mb-1"}>End Date:</h5>
+                                <p className={"mb-5"}>{this.state.endDate}</p>
                             </div>
                             <div>
                                 {this.state.data.Deleted === false && this.state.userName !== "admin" ?

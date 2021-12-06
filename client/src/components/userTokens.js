@@ -13,3 +13,11 @@ export const getUserEmail =() =>{
 export const setUserEmail = (email) =>{
     return localStorage.setItem("userEmail",email);
 };
+
+export const getUserId =() =>{
+    return localStorage.getItem("userID");
+};
+
+export const setUserId = (userid) =>{
+    return localStorage.setItem("userID",userid);
+};
