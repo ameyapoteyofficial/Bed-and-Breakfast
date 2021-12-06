@@ -177,7 +177,7 @@ class RoomListing extends React.Component {
                             
                             <Card className={"cards"} style={{ width: '19rem', border: 0 , color: 'black'}} onClick={() => this.openProductPage(value)}>
                                 <Card.Img  style={{height: 200, overflow: 'hidden'}} variant="top" src={value.Image} />
-                                <Card.Body style={{textAlign: 'center', borderRadius: '25px', padding: '20px'}}>
+                                <Card.Body style={{textAlign: 'center', padding: '20px'}}>
                                     <Card.Text style={{height: 50, overflow: 'hidden'}}>{value.Name}</Card.Text>
                                     <Card.Text>
                                         ${value.Price} / Night
