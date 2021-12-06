@@ -59,7 +59,7 @@ import {
           <div className={"main"}>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark navbar-default navbar-fixed-top">
               <a className="navbar-brand" href="/userHome">
-                   <span style={{fontWeight: 'bold', fontStyle: 'italic'}}>Bread & Breakfast</span>
+                   <span className="logo" style={{fontSize:'30px'}}>Bread & Breakfast</span>
               </a>
               <button
                 className="navbar-toggler"

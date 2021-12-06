@@ -5,7 +5,7 @@ export default function MenuOutside(props){
         <div className={"main"}>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark navbar-default navbar-fixed-top">
               <a className="navbar-brand" href="/">
-                <span style={{fontWeight: 'bold', fontStyle: 'italic'}}>Bread & Breakfast</span>
+                <span  className="logo" style={{fontSize:'30px'}}>Bread & Breakfast</span>
               </a>
               </nav>
        </div>

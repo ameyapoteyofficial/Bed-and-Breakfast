@@ -15,6 +15,9 @@
 .cards{
   cursor:pointer;
 }
+.logo{
+  font-family: "Brush Script MT", cursive;
+}
 .navbar{
   cursor:pointer;
 }
