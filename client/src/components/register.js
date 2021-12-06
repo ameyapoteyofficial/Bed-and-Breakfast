@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import { Login } from "./paths";
 import Footer from "./footer-file";
 import { getUserToken } from "./userTokens";
+import MenuOutside from "./menuoutside";
 
 class RegisterPage extends Component {
     constructor(props){
@@ -96,6 +97,8 @@ class RegisterPage extends Component {
 
     render(){
         return (
+            <div className={"main"} style={{backgroundColor: "black" }}>
+            <MenuOutside text="" name="Menu"/>
             <div className="container mt-5"> 
             <h1> Register </h1>
             <form className = "mt-5" onSubmit= {this.onSubmitForm}>
@@ -135,6 +138,7 @@ class RegisterPage extends Component {
         </form>
         <div className= "mt-3">
             <Footer url={Login}  text="Existing User? " name="Login"/></div>
+        </div>
         </div>
         );
     }
