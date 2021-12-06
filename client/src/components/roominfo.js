@@ -32,15 +32,19 @@ class RoomInfo extends React.Component {
 
         if(this.state.endDate < this.state.startDate){
             alert("Invalid Date Range!!");
+            this.props.history.push("/userHome");
          }
         else if(this.state.startDate === ""){
             alert("Please select the start date before proceeding!!");
+            this.props.history.push("/userHome");
         }
         else if(this.state.endDate === ""){
             alert("Please select the end date before proceeding!!");
+            this.props.history.push("/userHome");
         }
         else if(this.state.startDate < new Date()){
             alert("You cant book for a previous Date!!");
+            this.props.history.push("/userHome");
         }
         // if(this.state.startDate === "" || this.state.endDate ===""){
         //     alert("please select start and end date");

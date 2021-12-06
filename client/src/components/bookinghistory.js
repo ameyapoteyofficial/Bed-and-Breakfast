@@ -3,6 +3,8 @@ import axios from "axios";
 import { NavItem, Table } from "react-bootstrap";
 import { getUserToken, getUserEmail } from "./userTokens";
 import Menu from "./menu";
+import moment from "moment";
+import "moment-timezone";
 import { Login } from "./paths";
 import { withRouter } from "react-router";
 
@@ -21,18 +23,11 @@ class BookingHistoryPage extends Component {
         };
     }
 
-    getFormattedDate(date1) {
-        var date = new Date(date1);
-        //console.log("Date is: " + date);
-        var year = date.getFullYear();
-
-        var month = (1 + date.getMonth()).toString();
-        month = month.length > 1 ? month : '0' + month;
-
-        var day = (date.getDate()).toString();
-        day = day.length > 1 ? day : '0' + day;
-
-        return month + '/' + day + '/' + year;
+    getformattedDate(date){
+        var m = moment.utc(date);
+        m.tz('America/Chicago');
+        var s = m.format("YYYY-MM-DD");
+        return s;
     }
 
     componentDidMount() {
@@ -89,9 +84,9 @@ class BookingHistoryPage extends Component {
                                                     />
                                                 </td>
                                                 <td>{item.Room.Name}</td>
-                                                <td>{this.getFormattedDate(item.StartDate)}</td>
-                                                <td>{this.getFormattedDate(item.EndDate)}</td>
-                                                <td>{this.getFormattedDate(item.createdAt)}</td>
+                                                <td>{item.StartDate.substring(0,10)}</td>
+                                                <td>{item.EndDate.substring(0,10)}</td>
+                                                <td>{this.getformattedDate(item.createdAt)}</td>
                                                 <td>${item.Room.Price}</td>
                                             </tr>
                                         );
