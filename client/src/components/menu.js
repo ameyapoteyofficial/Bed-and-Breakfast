@@ -58,7 +58,7 @@ import {
         return (
           <div className={"main"}>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark navbar-default navbar-fixed-top">
-              <a className="navbar-brand" href="/">
+              <a className="navbar-brand" href="/userHome">
                    <span style={{fontWeight: 'bold', fontStyle: 'italic'}}>Bread & Breakfast</span>
               </a>
               <button
@@ -76,14 +76,14 @@ import {
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                   <li className="nav-item active">
-                    <a className="nav-link" href="/userHome" style={{fontWeight: 'bold', fontStyle: 'italic'}}>
+                    <a className="nav-link" href="/userHome" style={{fontWeight: 'bold'}}>
                       Home <span className="sr-only">(current)</span>
                     </a>
                   </li>
                   {this.state.userName === "admin" ? (
                     <div>
                       <li className="nav-item active">
-                        <a className="nav-link" onClick={this.inserItem} style={{fontWeight: 'bold', fontStyle: 'italic'}}>
+                        <a className="nav-link" onClick={this.inserItem} style={{fontWeight: 'bold'}}>
                           Add Room<span className="sr-only">(current)</span>
                         </a>
                       </li>
@@ -96,12 +96,12 @@ import {
                  <div>
                    <ul className="navbar-nav mr-auto">
                   <li className="nav-item active">
-                    <a className="nav-link" onClick={this.shoppingCart} style={{fontWeight: 'bold', fontStyle: 'italic'}}>
+                    <a className="nav-link" onClick={this.shoppingCart} style={{fontWeight: 'bold'}}>
                       Cart
                     </a>
                   </li>
                   <li className="nav-item active">
-                    <a className="nav-link" onClick={this.purchaseHistory} style={{fontWeight: 'bold', fontStyle: 'italic'}}>
+                    <a className="nav-link" onClick={this.purchaseHistory} style={{fontWeight: 'bold'}}>
                       Booking History
                     </a>
                   </li>
@@ -111,7 +111,7 @@ import {
                     <div></div>
                   )}
                   <li className="nav-item my-2 my-lg-0 active">
-                    <a className="nav-link" onClick={this.logUserOut} style={{fontWeight: 'bold', fontStyle: 'italic'}}>
+                    <a className="nav-link" onClick={this.logUserOut} style={{fontWeight: 'bold'}}>
                       Logout
                     </a>
                   </li>

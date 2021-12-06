@@ -96,7 +96,7 @@ class RoomInfo extends React.Component {
                                 <h5 className={"mb-1"}>Description:</h5>
                                 <p className={"mb-5"}>{this.state.data.Description}</p>
                                 <h5 className={"mb-1"}>Price:</h5>
-                                <p className={"mb-5"}>${this.state.data.Price}</p>
+                                <p className={"mb-5"}>${this.state.data.Price} / Night</p>
                                 <h5 className={"mb-1"}>Start Date:</h5>
                                 <p className={"mb-5"}>{this.state.startDate}</p>
                                 <h5 className={"mb-1"}>End Date:</h5>

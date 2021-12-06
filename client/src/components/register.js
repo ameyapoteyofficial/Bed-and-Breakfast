@@ -43,23 +43,11 @@ class RegisterPage extends Component {
 
             if(this.state.name === "" || this.state.emailId === "" || this.state.password === "" || this.state.confirmPassword === ""){
                 alert("Please enter all fields");
-                this.setState({
-                    name : "",
-                    emailId : "",
-                    password : "",
-                    confirmPassword : "",
-                });
                 return;
             }
 
             if(this.state.password !== this.state.confirmPassword){
                 alert("Passwords dont match");
-                this.setState({
-                    name : "",
-                    emailId : "",
-                    password : "",
-                    confirmPassword : "",
-                });
                 return;
             }
 
@@ -68,23 +56,11 @@ class RegisterPage extends Component {
 
             if (!emailPattern.test(this.state.emailId)) {
                 alert("Please enter a valid Email id ");
-                this.setState({
-                    name : "",
-                    emailId : "",
-                    password : "",
-                    confirmPassword : "",
-                });
                 return;
               }
 
               if (!passwordPattern.test(this.state.password)) {
                 alert("The password field should contain at least six characters, one uppercase letter, one number and one special character");
-                this.setState({
-                    name : "",
-                    emailId : "",
-                    password : "",
-                    confirmPassword : "",
-                });
                 return;
               }
 
