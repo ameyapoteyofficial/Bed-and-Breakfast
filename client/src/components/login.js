@@ -4,7 +4,7 @@ import Formcontent from "./formcontent"
 import { withRouter } from "react-router-dom";
 import { Register } from "./paths";
 import Footer from "./footer-file";
-import { setUserEmail, setUserToken } from "./userTokens";
+import { setUserEmail, setUserToken,setUserId } from "./userTokens";
 
 class LoginPage extends Component{
     constructor(props){
@@ -45,6 +45,7 @@ class LoginPage extends Component{
             if (res.status === 200) {
               setUserToken(res.data.Token);
               setUserEmail(res.data.Email);
+              setUserId(res.data._id);
               this.setState({
                 emailId : "",
                 password : ""

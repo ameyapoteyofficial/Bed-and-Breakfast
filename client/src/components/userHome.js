@@ -165,9 +165,18 @@ handleSearch = () => {
   let endDate = new Date(this.state.endDate);
   var roomIds =[];
   var updatedObject =[];
-  if(this.state.startDate === "" || this.state.endDate==="" ||endDate < startDate || startDate < new Date()){
+  if(endDate < startDate){
             alert("Invalid Date Range!!");
     }
+  else if(this.state.startDate === ""){
+    alert("Please select the start date before proceeding!!");
+  }
+  else if(this.state.endDate === ""){
+    alert("Please select the end date before proceeding!!");
+  }
+  else if(startDate < new Date()){
+    alert("You cant book for a previous Date!!");
+  }
     if(this.state.roomTypesChecked.length === 0){
       for (let j = 0; j < this.state.data.length; j++) {
         
