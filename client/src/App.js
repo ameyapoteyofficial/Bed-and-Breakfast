@@ -27,6 +27,10 @@ function App() {
   return (
     <div className="App">
      
+     {/* <div style={{ 
+      backgroundImage: `url("https://hips.hearstapps.com/clv.h-cdn.co/assets/17/29/3200x1600/landscape-1500478111-bed-and-breakfast-lead-index.jpg?resize=980:*")` 
+    }}> */}
+
      <Router>
        <Switch>
         <Route exact path={Login} component={LoginPage} />
@@ -42,6 +46,7 @@ function App() {
       </Router>
 
     </div>
+    // </div>
   );
 }
 

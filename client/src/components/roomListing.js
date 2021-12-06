@@ -175,9 +175,9 @@ class RoomListing extends React.Component {
                         <div className={"mr-3 mb-5"} style={{border: "1px solid black"}}>
                            
                             
-                            <Card className={"cards"} style={{ width: '19rem', border: 0 }} onClick={() => this.openProductPage(value)}>
+                            <Card className={"cards"} style={{ width: '19rem', border: 0 , color: 'black'}} onClick={() => this.openProductPage(value)}>
                                 <Card.Img  style={{height: 200, overflow: 'hidden'}} variant="top" src={value.Image} />
-                                <Card.Body style={{textAlign: 'center'}}>
+                                <Card.Body style={{textAlign: 'center', borderRadius: '25px', padding: '20px'}}>
                                     <Card.Text style={{height: 50, overflow: 'hidden'}}>{value.Name}</Card.Text>
                                     <Card.Text>
                                         ${value.Price} / Night
@@ -187,13 +187,13 @@ class RoomListing extends React.Component {
                             <div style={{textAlign: "center", backgroundColor: "white"}} className={"pb-3"}>
                                 <div >
                                     {this.state.userName !== "admin" ?
-                                        <Button variant="primary" style={{backgroundColor: '#333B3F', height: 50}} onClick={()=>this.updateCartInfo(value)}>ADD TO CART</Button> :
+                                        <Button className="btn btn-primary mt-3" variant="primary" style={{ height: 50}} onClick={()=>this.updateCartInfo(value)}>ADD TO CART</Button> :
                                         <div></div>
                                     }
                                 </div>
                                 <div>
                                         {this.state.userName === "admin" ?
-                                            <Button variant="primary" style={{backgroundColor: '#333B3F', height: 50, width: 200}} onClick={(e) => this.openPage(e, value, "edit")}>EDIT / DELETE</Button> :
+                                            <Button className="btn btn-primary mt-3" variant="primary" style={{ height: 50, width: 200}} onClick={(e) => this.openPage(e, value, "edit")}>EDIT / DELETE</Button> :
                                             <div></div>
                                         } 
                                 </div>

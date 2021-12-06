@@ -33,6 +33,11 @@
   color: #61dafb;
 }
 
+body{
+  background-color: black;
+  color: white;
+}
+
 button{
   justify-content: center !important;
 }
