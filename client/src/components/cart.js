@@ -10,6 +10,8 @@ import { Login } from "./paths";
 import { Table } from "react-bootstrap";
 import { Success } from "./paths";
 import Menu from "./menu";
+import moment from "moment";
+import "moment-timezone";
 
 
 class CartPage extends Component {
@@ -29,8 +31,11 @@ class CartPage extends Component {
         this.checkOut = this.checkOut.bind(this);
     }
      
-  
-        
+    getTotalPrice(startDate, endDate , cost){
+        let a = moment(startDate);
+        let  b = moment(endDate);
+         return Math.abs(a.diff(b, 'days'))*cost; 
+     }  
 
     componentDidMount() {
         let token = getUserToken();
@@ -42,7 +47,8 @@ class CartPage extends Component {
             .then((res) => {
                 if (res.data !== null) {
                     res.data.forEach((item) => {
-                        total = total + item.Room.Price;
+                        total = total + this.getTotalPrice(item.StartDate,item.EndDate,item.Room.Price);
+                        
                     })
                 }
                 this.setState({
@@ -164,7 +170,7 @@ class CartPage extends Component {
                                         <td>{item.Room.Name}</td>
                                         <td>{item.StartDate.substring(0,10)}</td>
                                         <td>{item.EndDate.substring(0,10)}</td>
-                                        <td>${item.Room.Price}</td>
+                                        <td>${this.getTotalPrice(item.StartDate,item.EndDate,item.Room.Price)}</td>
                                         <td>
                                             <button
                                                 className="btn-danger"

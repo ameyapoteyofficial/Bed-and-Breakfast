@@ -29,6 +29,11 @@ class BookingHistoryPage extends Component {
         var s = m.format("YYYY-MM-DD");
         return s;
     }
+    getTotalPrice(startDate, endDate , cost){
+       let a = moment(startDate);
+       let  b = moment(endDate);
+        return "$" +(Math.abs(a.diff(b, 'days'))*cost); 
+    }
 
     componentDidMount() {
         const token = getUserToken();
@@ -87,7 +92,7 @@ class BookingHistoryPage extends Component {
                                                 <td>{item.StartDate.substring(0,10)}</td>
                                                 <td>{item.EndDate.substring(0,10)}</td>
                                                 <td>{this.getformattedDate(item.createdAt)}</td>
-                                                <td>${item.Room.Price}</td>
+                                                <td>{this.getTotalPrice(item.StartDate,item.EndDate,item.Room.Price)}</td>
                                             </tr>
                                         );
                                     })}
