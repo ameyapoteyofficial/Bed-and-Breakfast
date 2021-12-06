@@ -28,20 +28,9 @@ class CartPage extends Component {
         this.deleteCartItem = this.deleteCartItem.bind(this);
         this.checkOut = this.checkOut.bind(this);
     }
-
-    getFormattedDate(date1) {
-        var date = new Date(date1);
-        //console.log("Date is: " + date);
-        var year = date.getFullYear();
-
-        var month = (1 + date.getMonth()).toString();
-        month = month.length > 1 ? month : '0' + month;
-
-        var day = (date.getDate()).toString();
-        day = day.length > 1 ? day : '0' + day;
-
-        return month + '/' + day + '/' + year;
-    }
+     
+  
+        
 
     componentDidMount() {
         let token = getUserToken();
@@ -173,9 +162,9 @@ class CartPage extends Component {
                                     <tr id={item._id}>
                                         <td>{idx + 1}</td>
                                         <td>{item.Room.Name}</td>
-                                        <td>{this.getFormattedDate(item.StartDate)}</td>
-                                        <td>{this.getFormattedDate(item.EndDate)}</td>
-                                        <td>{item.Room.Price}</td>
+                                        <td>{item.StartDate.substring(0,10)}</td>
+                                        <td>{item.EndDate.substring(0,10)}</td>
+                                        <td>${item.Room.Price}</td>
                                         <td>
                                             <button
                                                 className="btn-danger"
@@ -195,7 +184,7 @@ class CartPage extends Component {
                                 <td></td>
                                 <td></td>
                                 <td>Total cart price: </td>
-                                <td>{this.state.finalPrice}</td>
+                                <td>${this.state.finalPrice}</td>
                                 <td>
                                     <button className="btn-primary" onClick={this.checkOut}>
 
