@@ -4,6 +4,7 @@ import Formcontent from "./formcontent"
 import { withRouter } from "react-router-dom";
 import { Register } from "./paths";
 import Footer from "./footer-file";
+import MenuOutside from "./menuoutside";
 import { setUserEmail, setUserToken,setUserId } from "./userTokens";
 
 class LoginPage extends Component{
@@ -69,6 +70,8 @@ class LoginPage extends Component{
     }
     render(){
     return (
+      <div className={"main"} style={{backgroundColor: "black" }}>
+        <MenuOutside text="" name="Menu"/>
         <div className="container mt-5"> 
         <h1> Login </h1>
         <form className = "mt-5" onSubmit= {this.onSubmitForm}>
@@ -88,12 +91,12 @@ class LoginPage extends Component{
                         placeholder = "Enter Password"
                         onChange = {this.setPassword.bind(this)}
                         />
-                <button type="submit" className="btn btn-primary mt-3">Login</button>
+                <button type="submit" className="btn btn-primary mt-3">Proceed to Login</button>
         </form>
         <div className= "mt-3">
             <Footer url={Register} text="New User? " name="Register"/>
         </div>
-        
+        </div>
         </div>
     );
     }   

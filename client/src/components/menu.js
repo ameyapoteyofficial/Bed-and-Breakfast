@@ -59,7 +59,7 @@ import {
           <div className={"main"}>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark navbar-default navbar-fixed-top">
               <a className="navbar-brand" href="/">
-                <img height={100} style={{borderRadius: 50}} src={"https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F9%2F2020%2F01%2FBread-Hotel-Food-FT-Blog0120.jpg"} alt={"Bread & Breakfast"}></img>
+                   <span style={{fontWeight: 'bold', fontStyle: 'italic'}}>Bread & Breakfast</span>
               </a>
               <button
                 className="navbar-toggler"
@@ -76,20 +76,18 @@ import {
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                   <li className="nav-item active">
-                    <a className="nav-link" href="/userHome">
-                      HOME <span className="sr-only">(current)</span>
+                    <a className="nav-link" href="/userHome" style={{fontWeight: 'bold', fontStyle: 'italic'}}>
+                      Home <span className="sr-only">(current)</span>
                     </a>
                   </li>
                   {this.state.userName === "admin" ? (
                     <div>
-                      <li className="nav-item">
-                        <a className="nav-link" onClick={this.inserItem}>
-                          ADD ROOM<span className="sr-only">(current)</span>
+                      <li className="nav-item active">
+                        <a className="nav-link" onClick={this.inserItem} style={{fontWeight: 'bold', fontStyle: 'italic'}}>
+                          Add Room<span className="sr-only">(current)</span>
                         </a>
                       </li>
-                      {/*<li className="nav-item active">
-                                            <a className="nav-link" href="/">HOME <span className="sr-only">(current)</span></a>
-                                        </li>*/}
+                      {}
                     </div>
                   ) : (
                     <div></div>
@@ -97,14 +95,14 @@ import {
                   {this.state.userName !== "admin" ? (
                  <div>
                    <ul className="navbar-nav mr-auto">
-                  <li className="nav-item">
-                    <a className="nav-link" onClick={this.shoppingCart}>
-                      CART
+                  <li className="nav-item active">
+                    <a className="nav-link" onClick={this.shoppingCart} style={{fontWeight: 'bold', fontStyle: 'italic'}}>
+                      Cart
                     </a>
                   </li>
-                  <li className="nav-item">
-                    <a className="nav-link" onClick={this.purchaseHistory}>
-                      BOOKING HISTORY
+                  <li className="nav-item active">
+                    <a className="nav-link" onClick={this.purchaseHistory} style={{fontWeight: 'bold', fontStyle: 'italic'}}>
+                      Booking History
                     </a>
                   </li>
                   </ul>
@@ -112,9 +110,9 @@ import {
                   ) : (
                     <div></div>
                   )}
-                  <li className="nav-item my-2 my-lg-0">
-                    <a className="nav-link" onClick={this.logUserOut}>
-                      LOGOUT
+                  <li className="nav-item my-2 my-lg-0 active">
+                    <a className="nav-link" onClick={this.logUserOut} style={{fontWeight: 'bold', fontStyle: 'italic'}}>
+                      Logout
                     </a>
                   </li>
                 </ul>

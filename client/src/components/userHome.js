@@ -281,7 +281,7 @@ handleSearch = () => {
                 style={{ marginLeft: 100, marginRight: 100 }}
               >
                 <div className="col-md-2">
-                  <span>Check-in Date: </span>
+                  <span style={{color: "white" }}>Check-in Date: </span>
                   <input
                     type="date"
                     onChange={(event) => this.setState({startDate: event.target.value})}
@@ -289,7 +289,7 @@ handleSearch = () => {
                   />
                   <br/>
                   <br/>
-                  <span>Check-out Date: </span>
+                  <span style={{color: "white" }}>Check-out Date: </span>
                   <input
                     type="date"
                     onChange={(event) =>{ this.setState({endDate: event.target.value})}}
@@ -299,13 +299,13 @@ handleSearch = () => {
                   <br/>
                   <Button variant="warning" style={{height: 40, }} onClick={(e) => this.handleSearch()}>Search Rooms</Button>
                   <div className={"mt-5"}>
-                    <h5>Room Type</h5>
+                    <h5 style={{color: "white" }}>Room Type</h5>
                     <hr />
                     <div className={"col"}>
                       {this.state.roomTypes.map((data) => {
                         return (
                           <label className={"col"}>
-                            <input
+                            <input style={{color: "white" }}
                               className={"mr-2"}
                               name={data}
                               type="checkbox"

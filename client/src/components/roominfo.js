@@ -81,12 +81,12 @@ class RoomInfo extends React.Component {
 
     render() {
         return (
-            <div className={"main bg-light"}>
+            <div className={"main"} style={{backgroundColor: 'black'}}>
                 <Menu userName={this.state.userName}/>
                 <div>
-                    <div className={"row"} style={{marginLeft: "10%", marginRight: "10%", backgroundColor: "white", overflowY: "hidden"}}>
+                    <div className={"row"} style={{marginLeft: "10%", marginRight: "10%", backgroundColor: "black", overflowY: "hidden"}}>
                         <div className={"col-md-6 pt-5 pb-5"}>
-                            <img src={this.state.data.Image} width={"90%"} style={{marginLeft: "8%"}}></img>
+                            <img src={this.state.data.Image} width={"100%"} height={"60%"} style={{marginLeft: "3%", borderRadius: "25px"}}></img>
                         </div>
                         <div className={"col-md-6 pt-5 pb-5"}>
                             <div>
@@ -104,7 +104,7 @@ class RoomInfo extends React.Component {
                             </div>
                             <div>
                                 {this.state.data.Deleted === false && this.state.userName !== "admin" ?
-                                    <Button variant="primary" style={{backgroundColor: '#333B3F', height: 50, width: 500}} onClick={()=>this.updateCartInfo(this.state.data)}>ADD TO CART</Button> :
+                                    <Button className="btn btn-primary mt-3" variant="primary" style={{height: 50, width: 500}} onClick={()=>this.updateCartInfo(this.state.data)}>ADD TO CART</Button> :
                                     <div></div>
                                 }
                             </div>
@@ -112,7 +112,7 @@ class RoomInfo extends React.Component {
                                 <div className={"col ml-2"}>
                                     {
                                        this.state.userName === "admin" ?
-                                        <Button variant="primary" style={{backgroundColor: '#333B3F', height: 50, width: 200}} onClick={(e) => this.openPage(e, this.state.data, "edit")}>EDIT/DELETE</Button> :
+                                        <Button className="btn btn-primary mt-3" variant="primary" style={{height: 50, width: 200}} onClick={(e) => this.openPage(e, this.state.data, "edit")}>EDIT/DELETE</Button> :
                                         <div></div>
                                     }
                                 </div>
