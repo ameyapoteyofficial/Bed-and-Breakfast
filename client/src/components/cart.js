@@ -56,7 +56,7 @@ class CartPage extends Component {
                 })
             })
             .catch((error) => {
-                alert("error");
+                alert(error);
             });
     }
 

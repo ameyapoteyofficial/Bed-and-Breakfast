@@ -12,13 +12,10 @@ class UserHome extends Component{
         super(props);
         this.state = {
           data: [],
-            searchText: "",
             tempData: [],
             updated: false,
             roomTypes: ["Deluxe", "Executive", "Presidential"],
             roomTypesChecked: [],
-            costChecked: [],
-            cost: ["All Price", "$1-$10", "$11-$30", "$30+"],
             userName: "admin",
             startDate: "",
             endDate:"",
@@ -64,19 +61,13 @@ class UserHome extends Component{
       }
        
     }
-    handleCheckbox = (e, s, category) => {
+    handleFilter= (e, s) => {
       
       if(this.state.startDate !== "") {
           
           let checkedBoxes = [...this.state.roomTypesChecked];
           if (e.target.checked) {
               checkedBoxes.push(s);
-              /*if(s !== "All departments") {
-                          const tempData = this.state.data.filter((value) => value.category === s);
-                          this.setState({
-                              tempData: tempData
-                          })
-                      }*/
           } else {
               const index = checkedBoxes.findIndex((ch) => ch === s);
               checkedBoxes.splice(index, 1);
@@ -88,14 +79,7 @@ class UserHome extends Component{
           var old_data = this.state.data;
           console.log(checkedBoxes +checkedBoxes.length);
           if (checkedBoxes.length <= 0 || checkedBoxes.length === undefined) {
-              // const tempValue = this.state.data.filter((value) =>
-              //     value.Category.toLowerCase().includes(this.state.searchText.toLowerCase())
-              // );
-              // this.setState({
-              //     tempData: tempValue,
-              //     updated: !this.state.updated,
-              //     searchText: this.state.searchText
-              // });
+             
               this.setState({tempData: this.state.searchedData});
               
               
@@ -122,12 +106,6 @@ class UserHome extends Component{
           let checkedBoxes = [...this.state.roomTypesChecked];
           if (e.target.checked) {
               checkedBoxes.push(s);
-              /*if(s !== "All departments") {
-                          const tempData = this.state.data.filter((value) => value.category === s);
-                          this.setState({
-                              tempData: tempData
-                          })
-                      }*/
           } else {
               const index = checkedBoxes.findIndex((ch) => ch === s);
               checkedBoxes.splice(index, 1);
@@ -141,7 +119,7 @@ class UserHome extends Component{
                   tempData: old_data,
               });
           } else {
-              if (s !== "All departments") {
+              
                   for (var i = 0; i < checkedBoxes.length; i++) {
                       for (var j = 0; j < this.state.data.length; j++) {
                         console.log(checkedBoxes[i]+" "+this.state.data[j].Category);
@@ -156,7 +134,7 @@ class UserHome extends Component{
                       tempData: updatedData,
                       filteredData: updatedData
                   });
-              }
+              
           }
       }
 };
@@ -313,7 +291,7 @@ handleSearch = () => {
                                 (ch) => ch === data
                               )}
                               onChange={(e) =>
-                                this.handleCheckbox(e, data, "department")
+                                this.handleFilter(e, data)
                               }
                             />
                             {data}

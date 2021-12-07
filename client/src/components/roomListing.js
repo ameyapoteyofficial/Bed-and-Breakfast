@@ -19,14 +19,13 @@ class RoomListing extends React.Component {
             data: this.props.data,
             updatedData: this.props.data,
             userName: getUserEmail(),
-            cartData: [],
             startDate :this.props.startDate,
             endDate:this.props.endDate
         };
         
         this.handlePageChange = this.handlePageChange.bind(this);
         this.openProductPage = this.openProductPage.bind(this);
-        this.updateCartInfo = this.updateCartInfo.bind(this);
+        this.updateCart = this.updateCart.bind(this);
         this.openPage = this.openPage.bind(this);
     }
 
@@ -119,7 +118,7 @@ class RoomListing extends React.Component {
         
     }
 
-    updateCartInfo(data) {
+    updateCart(data) {
         if(this.state.startDate === "" || this.state.endDate ===""){
             alert("please select start and end date");
             this.props.history.push("/userHome");
@@ -190,7 +189,7 @@ class RoomListing extends React.Component {
                             <div style={{textAlign: "center", backgroundColor: "white"}} className={"pb-3"}>
                                 <div >
                                     {this.state.userName !== "admin" ?
-                                        <Button className="btn btn-primary mt-3" variant="primary" style={{ height: 50}} onClick={()=>this.updateCartInfo(value)}>ADD TO CART</Button> :
+                                        <Button className="btn btn-primary mt-3" variant="primary" style={{ height: 50}} onClick={()=>this.updateCart(value)}>ADD TO CART</Button> :
                                         <div></div>
                                     }
                                 </div>
