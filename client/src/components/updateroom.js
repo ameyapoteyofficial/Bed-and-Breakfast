@@ -8,12 +8,12 @@ export default class UpdateRoom extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeItemName = this.onChangeItemName.bind(this);
-    this.onChangeItemPrice = this.onChangeItemPrice.bind(this);
-    this.onChangeItemCategory = this.onChangeItemCategory.bind(this);
-    this.onChangeItemQuantity = this.onChangeItemQuantity.bind(this);
-    this.onChangeItemDescription = this.onChangeItemDescription.bind(this);
-    this.onChangeItemImage = this.onChangeItemImage.bind(this);
+    this.onChangeRoom = this.onChangeRoom.bind(this);
+    this.onChangePrice = this.onChangePrice.bind(this);
+    this.onChangeCate = this.onChangeCate.bind(this);
+    this.onChangebeds = this.onChangebeds.bind(this);
+    this.onChangeDesc = this.onChangeDesc.bind(this);
+    this.onChangeroomImage = this.onChangeroomImage.bind(this);
     this.onChangeArea = this.onChangeArea.bind(this);
     this.onChangeMaximum = this.onChangeMaximum.bind(this);
     this.onChangeBedType = this.onChangeBedType.bind(this);
@@ -60,26 +60,26 @@ export default class UpdateRoom extends Component {
     this.setState({ id: e.target.value });
   }
 
-  onChangeItemName(e) {
+  onChangeRoom(e) {
     this.setState({ name: e.target.value });
   }
 
-  onChangeItemPrice(e) {
+  onChangePrice(e) {
     this.setState({ price: e.target.value });
   }
 
-  onChangeItemCategory(e) {
+  onChangeCate(e) {
     this.setState({ category: e.target.value });
   }
 
-  onChangeItemQuantity(e) {
+  onChangebeds(e) {
     this.setState({ quantity: e.target.value });
   }
-  onChangeItemDescription(e) {
+  onChangeDesc(e) {
     this.setState({ description: e.target.value });
   }
 
-  onChangeItemImage(e) {
+  onChangeroomImage(e) {
     this.setState({ image: e.target.value });
   }
 
@@ -141,90 +141,53 @@ export default class UpdateRoom extends Component {
         <Menu userName={this.state.userName} />
 
         <div className="form-wrapper container mt-2">
-          <h3 className="title1" align="center">Update / Delete Room</h3>
+          <h3 align="center">Update / Delete Room</h3>
+          
           <Form onSubmit={this.onSubmit}>
             
           <Form.Group controlId="Name" className="mb-2">
               <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                value={this.state.name}
-                onChange={this.onChangeItemName}
-              />
+              <Form.Control type="text" value={this.state.name} onChange={this.onChangeRoom}/>
             </Form.Group>
 
             <Form.Group controlId="Quantity" className="mb-2">
               <Form.Label>No of Beds</Form.Label>
-              <Form.Control
-                type="text"
-                value={this.state.quantity}
-                onChange={this.onChangeItemQuantity}
-              />
+              <Form.Control type="text" value={this.state.quantity} onChange={this.onChangebeds}/>
             </Form.Group>
 
             <Form.Group controlId="Area" className="mb-2">
               <Form.Label>Area (in Sq ft)</Form.Label>
-              <Form.Control
-                type="text"
-                value={this.state.area}
-                onChange={this.onChangeArea}
-              />
+              <Form.Control type="text" value={this.state.area} onChange={this.onChangeArea}/>
             </Form.Group>
 
             <Form.Group controlId="Maximum_occupancy" className="mb-2">
               <Form.Label>Max Occupancy</Form.Label>
-              <Form.Control
-                type="text"
-                value={this.state.maximum}
-                onChange={this.onChangeMaximum}
-              />
+              <Form.Control type="text" value={this.state.maximum} onChange={this.onChangeMaximum}/>
             </Form.Group>
 
             <Form.Group controlId="Bed_type" className="mb-2">
               <Form.Label>Bed Type</Form.Label>
-              <Form.Control
-                type="text"
-                value={this.state.bedtype}
-                onChange={this.onChangeBedType}
-              />
+              <Form.Control type="text" value={this.state.bedtype} onChange={this.onChangeBedType}/>
             </Form.Group>
 
             <Form.Group controlId="Image" className="mb-2">
               <Form.Label>Image URL</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={this.onChangeItemImage}
-                value={this.state.image}
-              />
+              <Form.Control type="text" onChange={this.onChangeroomImage} value={this.state.image}/>
             </Form.Group>
 
             <Form.Group controlId="Price" className="mb-2">
-              <Form.Label>Price</Form.Label>
-              <Form.Control
-                type="text"
-                value={this.state.price}
-                onChange={this.onChangeItemPrice}
-              />
+            <Form.Label>Price</Form.Label>
+              <Form.Control type="text" value={this.state.price} onChange={this.onChangePrice}/>
             </Form.Group>
 
             <Form.Group controlId="Description" className="mb-2">
               <Form.Label>Description</Form.Label>
-              <Form.Control
-                type="text"
-                value={this.state.description}
-                onChange={this.onChangeItemDescription}
-              />
+              <Form.Control type="text" value={this.state.description} onChange={this.onChangeDesc}/>
             </Form.Group>
 
             <Form.Group controlId="Category" className="mb-2">
               <Form.Label>Category</Form.Label>
-              <Form.Control
-                as="select"
-                value={this.state.category}
-                onChange={this.onChangeItemCategory}
-                className="my-1 mr-sm-2"
-                custom
-              >
+              <Form.Control as="select" value={this.state.category} onChange={this.onChangeCate} className="my-1 mr-sm-2" custom>
                 <option value="0">Choose...</option>
                 <option value="Deluxe">Deluxe</option>
                 <option value="Executive">Executive</option>
@@ -232,11 +195,11 @@ export default class UpdateRoom extends Component {
               </Form.Control>
             </Form.Group>
 
-            <Button className={"mt-3 mb-2 mr-3"} variant="danger" size="lg" block="block" type="submit">
+            <Button className={"mt-3 mb-2 mr-3"} variant="primary" block="block" type="submit">
               Update Room
             </Button>
 
-            <Button className={"mt-3 mb-2"} onClick={this.deleteItem} variant="danger" size="lg" block="block">
+            <Button className={"mt-3 mb-2"} onClick={this.deleteItem} variant="primary" block="block">
               Delete Room
             </Button>
           </Form>

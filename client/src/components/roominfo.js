@@ -16,19 +16,18 @@ class RoomInfo extends React.Component {
             endDate: this.props.location.state.endDate,
             userID: getUserId(),
         }
-        this.openPage = this.openPage.bind(this);
-        this.updateCartInfo = this.updateCartInfo.bind(this);
+        this.editPage = this.editPage.bind(this);
+        this.cartInformation = this.cartInformation.bind(this);
     }
 
-    openPage(e, data, name) {
-        console.log("data in product info is:",data);
+    editPage(e, data, name) {
         if(name === "edit") {
             e.preventDefault();
             this.props.history.push(EditRoom, {id: data._id});
         }
     }
 
-    updateCartInfo(data) {
+    cartInformation(data) {
 
         if(this.state.endDate < this.state.startDate){
             alert("Invalid Date Range!!");
@@ -46,10 +45,7 @@ class RoomInfo extends React.Component {
             alert("You cant book for a previous Date!!");
             this.props.history.push("/userHome");
         }
-        // if(this.state.startDate === "" || this.state.endDate ===""){
-        //     alert("please select start and end date");
-        //     this.props.history.push("/userHome");
-        // }
+
         else{
             const objectData = {
                 Room: data,
@@ -61,7 +57,6 @@ class RoomInfo extends React.Component {
                     headers: { "Authorization": "Bearer " + getUserToken() }
                 }).then((res) => {
                     if (res.status === 200){
-                        console.log(res);
                         alert("Room added in to the cart");
                         this.props.history.push("/favourites");
                     }
@@ -104,7 +99,7 @@ class RoomInfo extends React.Component {
                             </div>
                             <div>
                                 {this.state.data.Deleted === false && this.state.userName !== "admin" ?
-                                    <Button className="btn btn-primary mt-3" variant="primary" style={{height: 50, width: 500}} onClick={()=>this.updateCartInfo(this.state.data)}>ADD TO CART</Button> :
+                                    <Button className="btn btn-primary mt-3" variant="primary" style={{height: 50, width: 500}} onClick={()=>this.cartInformation(this.state.data)}>ADD TO CART</Button> :
                                     <div></div>
                                 }
                             </div>
@@ -112,7 +107,7 @@ class RoomInfo extends React.Component {
                                 <div className={"col ml-2"}>
                                     {
                                        this.state.userName === "admin" ?
-                                        <Button className="btn btn-primary mt-3" variant="primary" style={{height: 50, width: 200}} onClick={(e) => this.openPage(e, this.state.data, "edit")}>EDIT/DELETE</Button> :
+                                        <Button className="btn btn-primary mt-3" variant="primary" style={{height: 50, width: 200}} onClick={(e) => this.editPage(e, this.state.data, "edit")}>EDIT/DELETE</Button> :
                                         <div></div>
                                     }
                                 </div>
