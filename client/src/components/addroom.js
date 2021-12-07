@@ -8,7 +8,7 @@ export default class Add extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeItemName = this.onChangeItemName.bind(this);
+    this.onChangeRoom = this.onChangeRoom.bind(this);
     this.onChangeItemPrice = this.onChangeItemPrice.bind(this);
     this.onChangeItemCategory = this.onChangeItemCategory.bind(this);
     this.onChangeItemQuantity = this.onChangeItemQuantity.bind(this);
@@ -37,7 +37,7 @@ export default class Add extends Component {
     this.setState({ id: e.target.value });
   }
 
-  onChangeItemName(e) {
+  onChangeRoom(e) {
     this.setState({ name: e.target.value });
   }
 
@@ -110,7 +110,7 @@ export default class Add extends Component {
         <Menu userName={this.state.userName} />
 
         <div className="form-wrapper container mt-2">
-          <h3 className="title1" align="center">Add Room</h3>
+          <h3 align="center">Add Room</h3>
           <Form onSubmit={this.onSubmit}>
            
             <Form.Group controlId="Name" className="mb-2">
@@ -118,7 +118,7 @@ export default class Add extends Component {
               <Form.Control
                 type="text"
                 value={this.state.name}
-                onChange={this.onChangeItemName}
+                onChange={this.onChangeRoom}
               />
             </Form.Group>
 
